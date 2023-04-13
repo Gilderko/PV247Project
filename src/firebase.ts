@@ -102,7 +102,7 @@ export type Furniture = {
 export const furnituresCollection = collection(
 	db,
 	'furnitures'
-) as CollectionReference<UserInfo>;
+) as CollectionReference<Furniture>;
 
 export const furnitureDocument = (id: string) =>
 	doc(db, 'furnitures', id) as DocumentReference<Furniture>;
@@ -118,7 +118,7 @@ export type Order = {
 	dateCreated: Date;
 };
 
-export const oredersCollection = collection(
+export const ordersCollection = collection(
 	db,
 	'orders'
 ) as CollectionReference<Order>;

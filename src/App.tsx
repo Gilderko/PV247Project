@@ -17,7 +17,7 @@ import {
 import { z } from 'zod';
 
 import theme from './theme';
-import useLoggedInUser from './hooks/useLoggedInUser';
+import useLoggedInUser, { UserProvider } from './hooks/useLoggedInUser';
 import { signOut } from './firebase';
 import Home from './pages/Home';
 import Products from './pages/Products';
@@ -131,6 +131,10 @@ declare module '@tanstack/react-router' {
 	}
 }
 
-const App = () => <RouterProvider router={router} />;
+const App = () => (
+	<UserProvider>
+		<RouterProvider router={router} />
+	</UserProvider>
+);
 
 export default App;
