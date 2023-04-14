@@ -22,7 +22,11 @@ const FurniturePreview = ({ furniture, furnitutreId }: FurnitureProps) => {
 		<Link to="/products/$Id" params={{ Id: furnitutreId }}>
 			<Paper sx={{ maxWidth: '15rem', maxHeight: '20rem' }}>
 				<Typography> {furniture.name}</Typography>
-				<img src={furniture.imageURL} alt="Furniture Image" />
+				<img
+					style={{ width: '100%' }}
+					src={furniture.imageURL}
+					alt="Furniture Image"
+				/>
 				<Typography>
 					{`${furniture.description.slice(0, stringLen)}...`}
 				</Typography>

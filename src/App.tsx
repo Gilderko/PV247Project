@@ -18,8 +18,7 @@ import { z } from 'zod';
 
 import theme from './theme';
 import useLoggedInUser, { UserProvider } from './hooks/useLoggedInUser';
-import { signOut } from './firebase';
-import Home from './pages/Home';
+import { furnitureDocument, furnituresCollection, signOut } from './firebase';
 import Products from './pages/Products';
 import ProductInspect from './pages/ProductInspect';
 import User from './pages/User';
@@ -27,10 +26,32 @@ import Login from './pages/Login';
 import Orders from './pages/Orders';
 import NotFound from './pages/NotFound';
 import ButtonLink from './components/ButtonLink';
+import { useEffect } from 'react';
+import { addDoc, setDoc } from 'firebase/firestore';
 
 const rootRoute = new RootRoute({
 	component: () => {
 		const user = useLoggedInUser();
+
+		/*const submit = async () => {
+			await addDoc(furnituresCollection, {
+				name: 'Table Ikea',
+				description: 'Very strong',
+				furnType: 'table',
+				materialType: 'wood',
+				priceDollars: 150,
+				imageURL:
+					'https://th.bing.com/th/id/R.f4b328f7f9f7b8f0397eab35b2781b0b?rik=r9TptUqWWQhr5g&pid=ImgRaw&r=0',
+				modelURL: 'https://gilderko.github.io/staticmodels/table/scene.gltf',
+				scale: [1, 1, 1],
+				position: [0, 0, 0],
+				rotation: [0, 0, 0]
+			});
+		};
+
+		useEffect(() => {
+			submit();
+		}, []);*/
 
 		return (
 			<ThemeProvider theme={theme}>
@@ -39,9 +60,8 @@ const rootRoute = new RootRoute({
 				<AppBar>
 					<Container maxWidth="sm">
 						<Toolbar disableGutters sx={{ gap: 2 }}>
-							<ButtonLink to="/">Home</ButtonLink>
-							<ButtonLink to="/products">Play</ButtonLink>
-							<ButtonLink to="/orders">About</ButtonLink>
+							<ButtonLink to="/">Products</ButtonLink>
+							<ButtonLink to="/orders">My Orders</ButtonLink>
 							<Box sx={{ flexGrow: 1 }} />
 							{!user ? (
 								<ButtonLink to="/login">Login</ButtonLink>
@@ -53,15 +73,9 @@ const rootRoute = new RootRoute({
 				</AppBar>
 
 				<Container
-					maxWidth="sm"
 					component="main"
 					sx={{
-						display: 'flex',
-						flexDirection: 'column',
-						justifyContent: 'center',
-						alignItems: 'center',
-						flexGrow: 1,
-						gap: 2
+						marginTop: '5rem'
 					}}
 				>
 					<Outlet />
@@ -74,18 +88,12 @@ const rootRoute = new RootRoute({
 const indexRoute = new Route({
 	getParentRoute: () => rootRoute,
 	path: '/',
-	component: Home
-});
-
-const productsRoute = new Route({
-	getParentRoute: () => rootRoute,
-	path: '/products',
 	component: Products
 });
 
 const productsInspectRoute = new Route({
-	getParentRoute: () => productsRoute,
-	path: '$Id',
+	getParentRoute: () => rootRoute,
+	path: '/products/$Id',
 	component: ProductInspect
 });
 
@@ -115,7 +123,7 @@ const notFoundRoute = new Route({
 
 const routeTree = rootRoute.addChildren([
 	indexRoute,
-	productsRoute.addChildren([productsInspectRoute]),
+	productsInspectRoute,
 	userInspectRoute,
 	ordersRoute,
 	loginRoute,

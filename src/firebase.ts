@@ -89,6 +89,8 @@ export const userInfoDocument = (id: string) =>
 export type FurnType = 'chair' | 'table' | 'sofa';
 export type MaterialType = 'wood' | 'steel' | 'glass' | 'plastic';
 
+type Vector3 = [number, number, number];
+
 export type Furniture = {
 	name: string;
 	description: string;
@@ -97,6 +99,9 @@ export type Furniture = {
 	priceDollars: number;
 	imageURL: string;
 	modelURL: string;
+	scale: Vector3;
+	position: Vector3;
+	rotation: Vector3;
 };
 
 export const furnituresCollection = collection(
