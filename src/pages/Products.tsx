@@ -24,7 +24,14 @@ const Products = () => {
 			{/* Filters */}
 			<Box></Box>
 			{/* Previews */}
-			<Box sx={{ display: 'flex', flexDirection: 'row', flexWrap: 'wrap' }}>
+			<Box
+				sx={{
+					display: 'flex',
+					flexDirection: 'row',
+					flexWrap: 'wrap',
+					gap: '1rem'
+				}}
+			>
 				{furnitures.map(doc => (
 					<FurniturePreview
 						key={doc.id}

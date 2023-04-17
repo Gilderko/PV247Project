@@ -10,7 +10,6 @@ type Product3DViewProps = {
 
 const Furniture3DInspect = ({ furniture }: Product3DViewProps) => {
 	const gltfModel = useLoader(GLTFLoader, furniture.modelURL);
-	console.log('Inpect 3D');
 	useEffect(() => {
 		gltfModel.scene.scale.set(
 			furniture.scale[0],

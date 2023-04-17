@@ -8,6 +8,8 @@ import * as React from 'react';
 import type { Camera, Event } from 'three';
 import { OrbitControls as OrbitControlsImpl } from 'three-stdlib';
 
+// This code was taken from utility part of React Three Fiber library since the entire library could not be downloaded
+// due to type incompatibility with MUI
 export type OrbitControlsChangeEvent = Event & {
 	target: EventTarget & { object: Camera };
 };
