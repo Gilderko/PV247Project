@@ -35,10 +35,7 @@ const rootRoute = new RootRoute({
 			<ThemeProvider theme={theme}>
 				<CssBaseline />
 
-				<AppBar>
-					<Container
-						sx={{ display: 'flex', flexGrow: 1, justifyContent: 'center' }}
-					></Container>
+				<AppBar sx={{ border: 'solid black 1px' }}>
 					<Container>
 						<Toolbar disableGutters sx={{ gap: 2 }}>
 							<ButtonLink to="/">Products</ButtonLink>

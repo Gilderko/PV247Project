@@ -89,8 +89,11 @@ export const userInfoDocument = (id: string) =>
 	doc(db, 'userInfos', id) as DocumentReference<UserInfo>;
 
 // Furniture collection
-export type FurnType = 'chair' | 'table' | 'sofa' | 'other';
-export type MaterialType = 'wood' | 'steel' | 'glass' | 'plastic';
+export const furnitureTypes = ['chair', 'table', 'sofa', 'other'] as const;
+export type FurnType = (typeof furnitureTypes)[number];
+
+export const materialTypes = ['wood', 'steel', 'glass', 'plastic'] as const;
+export type MaterialType = (typeof materialTypes)[number];
 
 type Vector3 = [number, number, number];
 

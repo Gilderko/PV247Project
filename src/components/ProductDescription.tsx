@@ -9,7 +9,7 @@ const ProductDescription = ({ furniture }: ProductDescriptionProps) => {
 	return (
 		<Box
 			sx={{
-				padding: '0rem 1rem 1rem 1rem',
+				padding: '0rem 1rem 1rem 2rem',
 				gap: '1.5rem',
 				display: 'flex',
 				flexDirection: 'column'

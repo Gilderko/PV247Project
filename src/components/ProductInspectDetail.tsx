@@ -7,6 +7,7 @@ import {
 	Box,
 	Card,
 	CardContent,
+	Divider,
 	Paper,
 	Typography,
 	useMediaQuery
@@ -42,6 +43,8 @@ const ProductInspectDetail = ({
 	return (
 		<>
 			<Card sx={{ padding: '1rem', marginBottom: '1rem' }} elevation={2}>
+				<Typography variant="h3">{furniture.name}</Typography>
+				<Divider />
 				<CardContent
 					style={{
 						display: 'flex',
@@ -50,8 +53,8 @@ const ProductInspectDetail = ({
 					}}
 				>
 					{/* Description */}
+
 					<Box>
-						<Typography variant="h3">{furniture.name}</Typography>
 						<Box
 							sx={{
 								maxWidth: '25rem',
