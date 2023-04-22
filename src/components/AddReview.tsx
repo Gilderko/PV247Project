@@ -87,7 +87,7 @@ const AddReview = ({ furnitureId, children }: Props) => {
 							</IconButton>
 						))}
 					</Box>
-					<TextField label={'Description'} fullWidth {...description.props} />
+					<TextField label="Description" fullWidth {...description.props} />
 				</DialogContent>
 				<DialogActions>
 					{submitError && (
@@ -102,10 +102,10 @@ const AddReview = ({ furnitureId, children }: Props) => {
 						</Typography>
 					)}
 					<Button onClick={closeDialog} variant="outlined">
-						{'Cancel'}
+						Cancel
 					</Button>
 					<Button onClick={handleSubmit} variant="contained">
-						{'Submit'}
+						Submit
 					</Button>
 				</DialogActions>
 			</Dialog>

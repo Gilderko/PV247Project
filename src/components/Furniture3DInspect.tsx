@@ -1,7 +1,9 @@
+/* eslint-disable react/no-unknown-property */
 import { useFrame, useLoader } from '@react-three/fiber';
 import { useEffect } from 'react';
 import { Mesh } from 'three';
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader';
+
 import { Furniture } from '../firebase';
 
 type Product3DViewProps = {
@@ -33,10 +35,10 @@ const Furniture3DInspect = ({ furniture }: Product3DViewProps) => {
 		});
 	}, [gltfModel]);
 
-	useFrame((state, delta) => {
-		let t = state.clock.getElapsedTime();
+	useFrame((state, _delta) => {
+		const t = state.clock.getElapsedTime();
 
-		let group = gltfModel.scene;
+		const group = gltfModel.scene;
 		group.rotation.y = t * 0.5;
 	});
 

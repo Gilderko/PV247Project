@@ -1,3 +1,4 @@
+/* eslint-disable react/no-unknown-property */
 import {
 	Box,
 	Button,
@@ -8,15 +9,26 @@ import {
 	useMediaQuery
 } from '@mui/material';
 import { Canvas } from '@react-three/fiber';
-import { QueryDocumentSnapshot, onSnapshot } from 'firebase/firestore';
+import {
+	QueryDocumentSnapshot,
+	deleteDoc,
+	onSnapshot
+} from 'firebase/firestore';
 import { Suspense, useEffect, useState } from 'react';
-import { Furniture, Review, reviewsCollection } from '../firebase';
+
+import {
+	Furniture,
+	Review,
+	reviewsCollection,
+	reviewsDocument
+} from '../firebase';
 import { OrbitControls } from '../reactThreeDreiUtilities/OrbitControls';
+import useLoggedInUser from '../hooks/useLoggedInUser';
+
 import Furniture3DInspect from './Furniture3DInspect';
 import Loading from './Loading';
 import ProductDescription from './ProductDescription';
 import ReviewPreview from './ReviewPreview';
-import useLoggedInUser from '../hooks/useLoggedInUser';
 import AddReview from './AddReview';
 
 type ProductInspectDetailProps = {
@@ -30,6 +42,7 @@ const ProductInspectDetail = ({
 }: ProductInspectDetailProps) => {
 	const matches = useMediaQuery('(min-width:650px)');
 	const [reviews, setReviews] = useState<QueryDocumentSnapshot<Review>[]>([]);
+	const [imagePreviewed, _setImagePreviewed] = useState<string>();
 	const user = useLoggedInUser();
 
 	useEffect(
@@ -57,33 +70,39 @@ const ProductInspectDetail = ({
 				>
 					{/* Description */}
 
-					<Box>
-						<Box
-							sx={{
-								maxWidth: '25rem',
-								height: '20rem',
-								diplay: 'flex'
-							}}
-						>
-							{furniture && (
-								<Suspense fallback={<Loading />}>
-									<Canvas
-										camera={{
-											fov: 50,
-											near: 0.1,
-											far: 1000,
-											position: [6, 8, 8]
-										}}
-									>
-										<color args={[255, 255, 255]} attach="background" />
-										<directionalLight color="white" position={[0, 3, 5]} />
-										<OrbitControls />
-										<Furniture3DInspect furniture={furniture} />
-									</Canvas>
-								</Suspense>
-							)}
-						</Box>
+					<Box
+						sx={{
+							maxWidth: '25rem',
+							height: '20rem',
+							diplay: 'flex'
+						}}
+					>
+						{!imagePreviewed && (
+							<Suspense fallback={<Loading />}>
+								<Canvas
+									camera={{
+										fov: 50,
+										near: 0.1,
+										far: 1000,
+										position: [6, 8, 8]
+									}}
+								>
+									<color args={[255, 255, 255]} attach="background" />
+									<directionalLight color="white" position={[0, 3, 5]} />
+									<OrbitControls />
+									<Furniture3DInspect furniture={furniture} />
+								</Canvas>
+							</Suspense>
+						)}
+						{imagePreviewed && (
+							<img
+								src={imagePreviewed}
+								style={{ width: '100%', maxHeight: '100%' }}
+								alt="Furniture preview"
+							/>
+						)}
 					</Box>
+
 					<ProductDescription furniture={furniture} />
 				</CardContent>
 			</Card>
@@ -96,7 +115,7 @@ const ProductInspectDetail = ({
 							variant="contained"
 							sx={{ marginBottom: '1rem' }}
 						>
-							{'Add review'}
+							Add review
 						</Button>
 					)}
 				</AddReview>
@@ -109,11 +128,13 @@ const ProductInspectDetail = ({
 							Reviews
 						</Typography>
 						<Box sx={{ display: 'flex', flexDirection: 'row', flexWrap: 1 }}>
-							{reviews.map(fur => (
+							{reviews.map(rev => (
 								<ReviewPreview
-									review={{ ...fur.data() }}
-									reviewId={fur.id}
-									key={fur.id}
+									review={{ ...rev.data() }}
+									deleteCallback={() =>
+										deleteDoc(reviewsDocument(furnitureId, rev.id))
+									}
+									key={rev.id}
 								/>
 							))}
 						</Box>

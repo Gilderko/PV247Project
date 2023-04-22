@@ -12,7 +12,8 @@ export const furnituresData: Furniture[] = [
 		modelURL: 'https://gilderko.github.io/staticmodels/table/scene.gltf',
 		scale: [1, 1, 1],
 		position: [0, 0, 0],
-		rotation: [0, 0, 0]
+		rotation: [0, 0, 0],
+		imagesDetail: []
 	},
 	{
 		name: 'Choco bookshelf',
@@ -26,7 +27,8 @@ export const furnituresData: Furniture[] = [
 			'https://gilderko.github.io/staticmodels/bookShelfChoco/scene.gltf',
 		scale: [0.015, 0.015, 0.015],
 		position: [0, 0, 0],
-		rotation: [0, 0, 0]
+		rotation: [0, 0, 0],
+		imagesDetail: []
 	},
 	{
 		name: 'Old cabinet',
@@ -40,7 +42,8 @@ export const furnituresData: Furniture[] = [
 		modelURL: 'https://gilderko.github.io/staticmodels/cabinetOld/scene.gltf',
 		scale: [0.02, 0.02, 0.02],
 		position: [0, -2, 0],
-		rotation: [0, 0, 0]
+		rotation: [0, 0, 0],
+		imagesDetail: []
 	},
 	{
 		name: 'Chairo blacko',
@@ -54,7 +57,8 @@ export const furnituresData: Furniture[] = [
 			'https://gilderko.github.io/staticmodels/chairBlackMetal/scene.gltf',
 		scale: [0.008, 0.008, 0.008],
 		position: [0, -1, 0],
-		rotation: [0, 0, 0]
+		rotation: [0, 0, 0],
+		imagesDetail: []
 	},
 	{
 		name: 'Vintage chair',
@@ -67,7 +71,8 @@ export const furnituresData: Furniture[] = [
 		modelURL: 'https://gilderko.github.io/staticmodels/chairOld/scene.gltf',
 		scale: [12, 12, 12],
 		position: [0, -2, 0],
-		rotation: [0, 0, 0]
+		rotation: [0, 0, 0],
+		imagesDetail: []
 	},
 	{
 		name: 'Old chest',
@@ -80,7 +85,8 @@ export const furnituresData: Furniture[] = [
 		modelURL: 'https://gilderko.github.io/staticmodels/chest/scene.gltf',
 		scale: [0.07, 0.07, 0.07],
 		position: [0, 0, 0],
-		rotation: [0, 0, 0]
+		rotation: [0, 0, 0],
+		imagesDetail: []
 	},
 	{
 		name: 'Work table',
@@ -93,7 +99,8 @@ export const furnituresData: Furniture[] = [
 		modelURL: 'https://gilderko.github.io/staticmodels/deskSimple/scene.gltf',
 		scale: [6, 6, 6],
 		position: [0, 0, 0],
-		rotation: [0, 0, 0]
+		rotation: [0, 0, 0],
+		imagesDetail: []
 	},
 	{
 		name: 'Simple chair',
@@ -106,7 +113,8 @@ export const furnituresData: Furniture[] = [
 		modelURL: 'https://gilderko.github.io/staticmodels/roundStand/scene.gltf',
 		scale: [0.075, 0.075, 0.075],
 		position: [0, -2.5, 0],
-		rotation: [0, 0, 0]
+		rotation: [0, 0, 0],
+		imagesDetail: []
 	},
 	{
 		name: 'Medieval table',
@@ -121,7 +129,8 @@ export const furnituresData: Furniture[] = [
 			'https://gilderko.github.io/staticmodels/tableMedieval/scene.gltf',
 		scale: [0.035, 0.035, 0.035],
 		position: [0, 0, 0],
-		rotation: [0, 0, 0]
+		rotation: [0, 0, 0],
+		imagesDetail: []
 	},
 	{
 		name: 'TV Furniture',
@@ -134,7 +143,8 @@ export const furnituresData: Furniture[] = [
 		modelURL: 'https://gilderko.github.io/staticmodels/tvFurniture/scene.gltf',
 		scale: [3, 3, 3],
 		position: [0, -1.5, 0],
-		rotation: [0, 0, 0]
+		rotation: [0, 0, 0],
+		imagesDetail: []
 	},
 	{
 		name: 'Classic table',
@@ -147,6 +157,7 @@ export const furnituresData: Furniture[] = [
 		modelURL: 'https://gilderko.github.io/staticmodels/woodenTable/scene.gltf',
 		scale: [3, 3, 3],
 		position: [0, 0, 0],
-		rotation: [0, 0, 0]
+		rotation: [0, 0, 0],
+		imagesDetail: []
 	}
 ];

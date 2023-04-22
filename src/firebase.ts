@@ -108,6 +108,7 @@ export type Furniture = {
 	scale: Vector3;
 	position: Vector3;
 	rotation: Vector3;
+	imagesDetail: string[];
 };
 
 export const furnituresCollection = collection(

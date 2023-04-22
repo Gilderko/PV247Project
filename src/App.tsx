@@ -2,7 +2,6 @@ import {
 	AppBar,
 	Container,
 	Toolbar,
-	Button,
 	Box,
 	ThemeProvider,
 	CssBaseline
@@ -41,7 +40,7 @@ const rootRoute = new RootRoute({
 							<ButtonLink to="/">Products</ButtonLink>
 							<ButtonLink to="/orders">My Orders</ButtonLink>
 							<Box sx={{ flexGrow: 1 }} />
-							<img style={{ height: '3rem' }} src={logo} />
+							<img style={{ height: '3rem' }} src={logo} alt="Logo" />
 
 							{!user ? (
 								<ButtonLink to="/login">Login</ButtonLink>

@@ -2,6 +2,7 @@ import { Box } from '@mui/material';
 import { Outlet } from '@tanstack/react-router';
 import { QueryDocumentSnapshot, onSnapshot } from 'firebase/firestore';
 import { useEffect, useState } from 'react';
+
 import { FilterForm, FilterValues } from '../components/FilterForm';
 import FurniturePreview from '../components/FurniturePreview';
 import { Furniture, furnituresCollection } from '../firebase';
@@ -10,7 +11,7 @@ const filterProducts = (
 	document: QueryDocumentSnapshot<Furniture>,
 	filterFurniture: FilterValues
 ) => {
-	var shouldReturn = true;
+	let shouldReturn = true;
 	const docData = document.data();
 	if (filterFurniture.furnitureName) {
 		shouldReturn &&= docData.name
@@ -55,7 +56,7 @@ const Products = () => {
 	return (
 		<Box sx={{ display: 'flex', flexDirection: 'column', width: '100%' }}>
 			{/* Filters */}
-			<FilterForm onSubmit={filter => setFilterValues(filter)}></FilterForm>
+			<FilterForm onSubmit={filter => setFilterValues(filter)} />
 			{/* Previews */}
 			<Box
 				sx={{
