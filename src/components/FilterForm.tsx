@@ -29,7 +29,7 @@ export const FilterForm: React.FC<Props> = ({ onSubmit }) => {
 				onSubmit(values);
 			}}
 		>
-			{({}) => (
+			{({ errors }) => (
 				<Form
 					style={{
 						display: 'flex',
@@ -44,7 +44,9 @@ export const FilterForm: React.FC<Props> = ({ onSubmit }) => {
 					/>
 					<Box sx={{ padding: '1rem 1rem 0rem 1rem' }}>
 						<Typography sx={{ fontWeight: 'bold' }}>Furniture type</Typography>
-						<Box sx={{ display: 'flex', flexDirection: 'row' }}>
+						<Box
+							sx={{ display: 'flex', flexDirection: 'row', flexWrap: 'wrap' }}
+						>
 							{furnitureTypes.map(furnType => (
 								<MyCheckBoxField
 									key={furnType.toString()}
@@ -56,7 +58,9 @@ export const FilterForm: React.FC<Props> = ({ onSubmit }) => {
 							))}
 						</Box>
 						<Typography sx={{ fontWeight: 'bold' }}>Material type</Typography>
-						<Box sx={{ display: 'flex', flexDirection: 'row' }}>
+						<Box
+							sx={{ display: 'flex', flexDirection: 'row', flexWrap: 'wrap' }}
+						>
 							{materialTypes.map(matType => (
 								<MyCheckBoxField
 									key={matType.toString()}

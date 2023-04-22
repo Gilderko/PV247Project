@@ -1,24 +1,23 @@
-import { Canvas, useFrame, useLoader } from '@react-three/fiber';
-import { Furniture, Review, reviewsCollection } from '../firebase';
-import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader';
-import { Suspense, useEffect, useState } from 'react';
-import { Mesh } from 'three';
 import {
 	Box,
+	Button,
 	Card,
 	CardContent,
 	Divider,
-	Paper,
 	Typography,
 	useMediaQuery
 } from '@mui/material';
-import Furniture3DInspect from './Furniture3DInspect';
-import { OrbitControls } from '../reactThreeDreiUtilities/OrbitControls';
-import ProductDescription from './ProductDescription';
-import Loading from './Loading';
+import { Canvas } from '@react-three/fiber';
 import { QueryDocumentSnapshot, onSnapshot } from 'firebase/firestore';
-import FurniturePreview from './FurniturePreview';
+import { Suspense, useEffect, useState } from 'react';
+import { Furniture, Review, reviewsCollection } from '../firebase';
+import { OrbitControls } from '../reactThreeDreiUtilities/OrbitControls';
+import Furniture3DInspect from './Furniture3DInspect';
+import Loading from './Loading';
+import ProductDescription from './ProductDescription';
 import ReviewPreview from './ReviewPreview';
+import useLoggedInUser from '../hooks/useLoggedInUser';
+import AddReview from './AddReview';
 
 type ProductInspectDetailProps = {
 	furnitureId: string;
@@ -29,8 +28,9 @@ const ProductInspectDetail = ({
 	furnitureId,
 	furniture
 }: ProductInspectDetailProps) => {
-	const matches = useMediaQuery('(min-width:600px)');
+	const matches = useMediaQuery('(min-width:650px)');
 	const [reviews, setReviews] = useState<QueryDocumentSnapshot<Review>[]>([]);
+	const user = useLoggedInUser();
 
 	useEffect(
 		() =>
@@ -42,7 +42,10 @@ const ProductInspectDetail = ({
 
 	return (
 		<>
-			<Card sx={{ padding: '1rem', marginBottom: '1rem' }} elevation={2}>
+			<Card
+				sx={{ padding: '1rem 1rem 0rem 1rem', marginBottom: '1rem' }}
+				elevation={2}
+			>
 				<Typography variant="h3">{furniture.name}</Typography>
 				<Divider />
 				<CardContent
@@ -58,7 +61,7 @@ const ProductInspectDetail = ({
 						<Box
 							sx={{
 								maxWidth: '25rem',
-								height: '25rem',
+								height: '20rem',
 								diplay: 'flex'
 							}}
 						>
@@ -84,6 +87,20 @@ const ProductInspectDetail = ({
 					<ProductDescription furniture={furniture} />
 				</CardContent>
 			</Card>
+			{/* Add Review */}
+			{!reviews.find(r => r.data().byEmail === user?.email) && (
+				<AddReview furnitureId={furnitureId}>
+					{open => (
+						<Button
+							onClick={open}
+							variant="contained"
+							sx={{ marginBottom: '1rem' }}
+						>
+							{'Add review'}
+						</Button>
+					)}
+				</AddReview>
+			)}
 			{/* Reviews */}
 			{reviews.length !== 0 && (
 				<Card>
