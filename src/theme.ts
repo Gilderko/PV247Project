@@ -3,8 +3,7 @@ import { createTheme } from '@mui/material';
 declare module '@mui/material/styles' {
 	// eslint-disable-next-line @typescript-eslint/consistent-type-definitions
 	interface Palette {
-		playerX?: string;
-		playerO?: string;
+		buttonColor: PaletteOptions['getContrastText'];
 	}
 	// eslint-disable-next-line @typescript-eslint/consistent-type-definitions
 	interface PaletteOptions {
@@ -15,10 +14,9 @@ declare module '@mui/material/styles' {
 
 const theme = createTheme({
 	palette: {
-		primary: { main: '#f2d45c' },
-		playerX: '#f25a5a',
-		playerO: '#5a8cf2',
-		mode: 'dark'
+		primary: { main: '#f2d45c', contrastText: '#5c7af2' },
+		secondary: { main: '#000' },
+		mode: 'light'
 	},
 	components: {
 		MuiCssBaseline: {

@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 import { useNavigate, useParams } from '@tanstack/react-router';
 import { Suspense, useEffect, useState } from 'react';
 import { getDoc, onSnapshot } from 'firebase/firestore';
@@ -12,24 +13,40 @@ import {
 	reviewsDocument
 } from '../firebase';
 import Product3DView from '../components/ProductPreview';
+=======
+import { useParams } from '@tanstack/react-router';
+import { useEffect, useState } from 'react';
+import { DocumentSnapshot, onSnapshot } from 'firebase/firestore';
+import { Box } from '@mui/material';
+
+import { Furniture, furnitureDocument } from '../firebase';
+import ProductInspectDetail from '../components/ProductInspectDetail';
+>>>>>>> main
 
 const ProductInspect = () => {
 	const params = useParams();
-	console.log('Product inpesct');
-	const furnitureId = params.Id;
+	const furId = params.Id;
 
-	const [furniture, setFurniture] = useState<Furniture>();
-
+	const [furniture, setFurniture] = useState<DocumentSnapshot<Furniture>>();
+	const furData = furniture?.data();
 	useEffect(
 		() =>
-			onSnapshot(furnitureDocument(furnitureId ?? ''), snapshot => {
-				setFurniture(snapshot.data());
+			onSnapshot(furnitureDocument(furId ?? ''), snapshot => {
+				setFurniture(snapshot);
 			}),
 		[]
 	);
 
 	// Here do the 3D Stuff
-	return <>{furniture && <Product3DView furniture={furniture} />}</>;
+	return (
+		<Box>
+			{furniture && furData ? (
+				<ProductInspectDetail furnitureId={furniture.id} furniture={furData} />
+			) : (
+				<Box />
+			)}
+		</Box>
+	);
 };
 
 export default ProductInspect;

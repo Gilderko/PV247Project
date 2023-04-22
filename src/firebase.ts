@@ -55,19 +55,22 @@ const db = getFirestore();
 // Reviews collection
 export type Review = {
 	byEmail: string;
-	furnitureId: string;
 	stars: number;
 	description?: string;
 	createdAt: Timestamp;
 };
 
-export const reviewsCollection = collection(
-	db,
-	'reviews'
-) as CollectionReference<Review>;
+export const reviewsDocument = (furId: string, reviewId: string) =>
+	doc(
+		db,
+		'furnitures',
+		furId,
+		'reviews',
+		reviewId
+	) as DocumentReference<Review>;
 
-export const reviewsDocument = (id: string) =>
-	doc(db, 'reviews', id) as DocumentReference<Review>;
+export const reviewsCollection = (furId: string) =>
+	collection(db, 'furnitures', furId, 'reviews') as CollectionReference<Review>;
 
 // Users info collection
 export type UserInfo = {
@@ -86,8 +89,11 @@ export const userInfoDocument = (id: string) =>
 	doc(db, 'userInfos', id) as DocumentReference<UserInfo>;
 
 // Furniture collection
-export type FurnType = 'chair' | 'table' | 'sofa';
-export type MaterialType = 'wood' | 'steel' | 'glass' | 'plastic';
+export const furnitureTypes = ['chair', 'table', 'sofa', 'other'] as const;
+export type FurnType = (typeof furnitureTypes)[number];
+
+export const materialTypes = ['wood', 'steel', 'glass', 'plastic'] as const;
+export type MaterialType = (typeof materialTypes)[number];
 
 type Vector3 = [number, number, number];
 
@@ -102,6 +108,7 @@ export type Furniture = {
 	scale: Vector3;
 	position: Vector3;
 	rotation: Vector3;
+	imagesDetail: string[];
 };
 
 export const furnituresCollection = collection(

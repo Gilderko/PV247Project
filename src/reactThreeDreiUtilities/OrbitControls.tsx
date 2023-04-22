@@ -1,3 +1,4 @@
+/* eslint-disable react/no-unknown-property */
 import {
 	EventManager,
 	ReactThreeFiber,
@@ -8,6 +9,8 @@ import * as React from 'react';
 import type { Camera, Event } from 'three';
 import { OrbitControls as OrbitControlsImpl } from 'three-stdlib';
 
+// This code was taken from utility part of React Three Fiber library since the entire library could not be downloaded
+// due to type incompatibility with MUI
 export type OrbitControlsChangeEvent = Event & {
 	target: EventTarget & { object: Camera };
 };
@@ -56,9 +59,9 @@ export const OrbitControls = React.forwardRef<
 		const set = useThree(state => state.set);
 		const get = useThree(state => state.get);
 		const performance = useThree(state => state.performance);
-		const explCamera = camera || defaultCamera;
-		const explDomElement = (domElement ||
-			events.connected ||
+		const explCamera = camera ?? defaultCamera;
+		const explDomElement = (domElement ??
+			events.connected ??
 			gl.domElement) as HTMLElement;
 		const controls = React.useMemo(
 			() => new OrbitControlsImpl(explCamera),

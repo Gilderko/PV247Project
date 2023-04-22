@@ -2,7 +2,6 @@ import {
 	AppBar,
 	Container,
 	Toolbar,
-	Button,
 	Box,
 	ThemeProvider,
 	CssBaseline
@@ -20,7 +19,7 @@ import { addDoc, setDoc } from 'firebase/firestore';
 
 import theme from './theme';
 import useLoggedInUser, { UserProvider } from './hooks/useLoggedInUser';
-import { furnitureDocument, furnituresCollection, signOut } from './firebase';
+import { signOut } from './firebase';
 import Products from './pages/Products';
 import ProductInspect from './pages/ProductInspect';
 import User from './pages/User';
@@ -29,46 +28,29 @@ import Login from './pages/Login';
 import Orders from './pages/Orders';
 import NotFound from './pages/NotFound';
 import ButtonLink from './components/ButtonLink';
+import logo from './assets/websiteImage.png';
 
 const rootRoute = new RootRoute({
 	component: () => {
 		const user = useLoggedInUser();
 
-		/*const submit = async () => {
-			await addDoc(furnituresCollection, {
-				name: 'Table Ikea',
-				description: 'Very strong',
-				furnType: 'table',
-				materialType: 'wood',
-				priceDollars: 150,
-				imageURL:
-					'https://th.bing.com/th/id/R.f4b328f7f9f7b8f0397eab35b2781b0b?rik=r9TptUqWWQhr5g&pid=ImgRaw&r=0',
-				modelURL: 'https://gilderko.github.io/staticmodels/table/scene.gltf',
-				scale: [1, 1, 1],
-				position: [0, 0, 0],
-				rotation: [0, 0, 0]
-			});
-		};
-
-		useEffect(() => {
-			submit();
-		}, []);*/
-
 		return (
 			<ThemeProvider theme={theme}>
 				<CssBaseline />
 
-				<AppBar>
-					<Container maxWidth="sm">
+				<AppBar sx={{ border: 'solid black 1px' }}>
+					<Container>
 						<Toolbar disableGutters sx={{ gap: 2 }}>
 							<ButtonLink to="/">Products</ButtonLink>
 							<ButtonLink to="/orders">My Orders</ButtonLink>
 							{user && <ButtonLink to="/user">My Profile</ButtonLink>}
 							<Box sx={{ flexGrow: 1 }} />
+							<img style={{ height: '3rem' }} src={logo} alt="Logo" />
+
 							{!user ? (
 								<ButtonLink to="/login">Login</ButtonLink>
 							) : (
-								<Button onClick={signOut}>Logout</Button>
+								<ButtonLink onClick={signOut}>Logout</ButtonLink>
 							)}
 						</Toolbar>
 					</Container>
