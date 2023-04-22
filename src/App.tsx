@@ -15,6 +15,8 @@ import {
 	Route
 } from '@tanstack/react-router';
 import { z } from 'zod';
+import { useEffect } from 'react';
+import { addDoc, setDoc } from 'firebase/firestore';
 
 import theme from './theme';
 import useLoggedInUser, { UserProvider } from './hooks/useLoggedInUser';
@@ -22,12 +24,11 @@ import { furnitureDocument, furnituresCollection, signOut } from './firebase';
 import Products from './pages/Products';
 import ProductInspect from './pages/ProductInspect';
 import User from './pages/User';
+import EditUser from './pages/EditUser';
 import Login from './pages/Login';
 import Orders from './pages/Orders';
 import NotFound from './pages/NotFound';
 import ButtonLink from './components/ButtonLink';
-import { useEffect } from 'react';
-import { addDoc, setDoc } from 'firebase/firestore';
 
 const rootRoute = new RootRoute({
 	component: () => {
@@ -62,6 +63,7 @@ const rootRoute = new RootRoute({
 						<Toolbar disableGutters sx={{ gap: 2 }}>
 							<ButtonLink to="/">Products</ButtonLink>
 							<ButtonLink to="/orders">My Orders</ButtonLink>
+							{user && <ButtonLink to="/user">My Profile</ButtonLink>}
 							<Box sx={{ flexGrow: 1 }} />
 							{!user ? (
 								<ButtonLink to="/login">Login</ButtonLink>
@@ -99,8 +101,14 @@ const productsInspectRoute = new Route({
 
 const userInspectRoute = new Route({
 	getParentRoute: () => rootRoute,
-	path: '/users/$Id',
+	path: '/user',
 	component: User
+});
+
+const userEditRoute = new Route({
+	getParentRoute: () => rootRoute,
+	path: '/edituser',
+	component: EditUser
 });
 
 const loginRoute = new Route({
@@ -127,6 +135,7 @@ const routeTree = rootRoute.addChildren([
 	userInspectRoute,
 	ordersRoute,
 	loginRoute,
+	userEditRoute,
 	notFoundRoute
 ]);
 
