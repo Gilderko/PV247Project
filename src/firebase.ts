@@ -135,7 +135,7 @@ export type Order = {
 	streetNumber: number;
 	furnitureId: string;
 	userEmail: string;
-	dateCreated: Date;
+	dateCreated: Timestamp;
 };
 
 export const ordersCollection = collection(

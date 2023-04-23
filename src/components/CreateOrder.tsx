@@ -14,6 +14,7 @@ import {
 import { ReactNode, useState } from 'react';
 import { Timestamp, addDoc, setDoc } from 'firebase/firestore';
 import { Form } from 'react-final-form';
+import { useNavigate } from '@tanstack/react-router';
 
 import useField from '../hooks/useField';
 import { orderDocument, ordersCollection, reviewsDocument } from '../firebase';
@@ -29,7 +30,7 @@ type Props = {
 
 const CreateOrder = ({ furnitureId, furnitureName, children }: Props) => {
 	const user = useLoggedInUser();
-
+	const navigate = useNavigate();
 	// Open state
 	const [open, setOpen] = useState(false);
 
@@ -81,6 +82,7 @@ const CreateOrder = ({ furnitureId, furnitureName, children }: Props) => {
 							values.street,
 							values.streetNumber
 						);
+						navigate({ to: '/orders' });
 					}}
 					render={({ handleSubmit }) => (
 						<Box component="form" onSubmit={handleSubmit}>
