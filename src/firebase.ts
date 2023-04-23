@@ -74,8 +74,9 @@ export const reviewsCollection = (furId: string) =>
 
 // Users info collection
 export type UserInfo = {
-	userEmail: string;
-	name: string;
+	email: string;
+	firstName: string;
+	lastName: string;
 	birthDate: Date;
 	profileImageURL: string;
 };

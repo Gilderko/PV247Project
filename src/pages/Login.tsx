@@ -1,4 +1,12 @@
-import { Button, Paper, Typography, TextField, Box } from '@mui/material';
+import {
+	Button,
+	Paper,
+	Typography,
+	TextField,
+	Box,
+	Grid,
+	useTheme
+} from '@mui/material';
 import { FormEvent, useState } from 'react';
 import { useNavigate } from '@tanstack/react-router';
 
@@ -8,10 +16,9 @@ import { signIn, signUp } from '../firebase';
 
 const Login = () => {
 	usePageTitle('Login');
+	const theme = useTheme();
 
 	const navigate = useNavigate();
-
-	const [isSignUp, setSignUp] = useState(false);
 
 	const email = useField('email', true);
 	const password = useField('password', true);
@@ -24,9 +31,7 @@ const Login = () => {
 			onSubmit={async (e: FormEvent) => {
 				e.preventDefault();
 				try {
-					isSignUp
-						? await signUp(email.value, password.value)
-						: await signIn(email.value, password.value);
+					await signIn(email.value, password.value);
 					navigate({ to: '/' });
 				} catch (err) {
 					setSubmitError(
@@ -47,39 +52,54 @@ const Login = () => {
 			</Typography>
 			<TextField label="Email" {...email.props} type="email" />
 			<TextField label="Password" {...password.props} type="password" />
-			<Box
-				sx={{
-					display: 'flex',
-					gap: 2,
-					alignItems: 'center',
-					alignSelf: 'flex-end',
-					mt: 2
-				}}
+			<Grid
+				container
+				direction="row"
+				justifyContent="space-between"
+				alignItems="center"
 			>
-				{submitError && (
-					<Typography
-						variant="caption"
-						textAlign="right"
-						sx={{ color: 'error.main' }}
-					>
-						{submitError}
+				<Grid item>
+					<Typography variant="caption" textAlign="right">
+						Don&apos;t have an account yet?
 					</Typography>
-				)}
-				<Button
-					type="submit"
-					variant="outlined"
-					onClick={() => setSignUp(true)}
-				>
-					SignUp
-				</Button>
-				<Button
-					type="submit"
-					variant="contained"
-					onClick={() => setSignUp(false)}
-				>
-					SignIn
-				</Button>
-			</Box>
+					<Typography>
+						<Button
+							variant="text"
+							onClick={() => navigate({ to: '/register' })}
+							sx={{ textTransform: 'none', p: 0, color: '' }}
+						>
+							Create one
+						</Button>
+					</Typography>
+				</Grid>
+				<Grid item>
+					<Box
+						sx={{
+							display: 'flex',
+							gap: 2,
+							alignItems: 'center',
+							alignSelf: 'flex-end'
+						}}
+					>
+						{submitError && (
+							<Typography
+								variant="caption"
+								textAlign="right"
+								sx={{ color: 'error.main' }}
+							>
+								{submitError}
+							</Typography>
+						)}
+						<Button
+							type="submit"
+							variant="contained"
+							sx={{ color: theme.palette.secondary.main }}
+						>
+							SignIn
+						</Button>
+					</Box>
+				</Grid>
+			</Grid>
 		</Paper>
 	);
 };
