@@ -9,7 +9,7 @@ const TextInput = ({ id, helperText, ...props }: Props) => {
 	const { input, meta } = useField(id, {
 		subscription: { value: true, touched: true, error: true }
 	});
-	const hasError = meta.touched && meta.error;
+	const hasError = !!(meta.touched && meta.error);
 	return (
 		<TextField
 			{...props}
