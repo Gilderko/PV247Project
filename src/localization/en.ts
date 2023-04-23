@@ -12,5 +12,6 @@ export default {
 	'register-user-title': 'Join us',
 	'register-user-submit-button': 'Register',
 	'register-user-passwordRepeat-error': 'Passwords do not match',
-	'register-user-email-error': 'Email is not in the correct format'
+	'register-user-email-error': 'Email is not in the correct format',
+	'register-user-profileImage-label': 'Profile Image'
 };

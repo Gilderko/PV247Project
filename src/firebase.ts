@@ -15,6 +15,7 @@ import {
 	getFirestore,
 	Timestamp
 } from 'firebase/firestore';
+import { getStorage, ref } from 'firebase/storage';
 
 const firebaseConfig = {
 	apiKey: 'AIzaSyBSpUwyp8gMJc0cJsni6Cz_5JL-PR-ibtg',
@@ -26,10 +27,14 @@ const firebaseConfig = {
 };
 
 // Initialize Firebase
-initializeApp(
+const app = initializeApp(
 	// Done: Add project config from https://console.firebase.google.com/u/0/project/<<porjectId>>/settings/general/web
 	firebaseConfig
 );
+
+const storage = getStorage(app);
+
+export const userProfilePhotos = ref(storage, 'userProfilePhotos');
 
 // Authentication
 const auth = getAuth();
@@ -50,7 +55,7 @@ export const onAuthChanged = (callback: (u: User | null) => void) =>
 	onAuthStateChanged(auth, callback);
 
 // Firestore
-const db = getFirestore();
+const db = getFirestore(app);
 
 // Reviews collection
 export type Review = {

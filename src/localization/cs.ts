@@ -12,5 +12,6 @@ export default {
 	'register-user-title': 'Přidejte se k nám',
 	'register-user-submit-button': 'Registrovat',
 	'register-user-passwordRepeat-error': 'Hesla se neshodují',
-	'register-user-email-error': 'Email není ve správném formátu'
+	'register-user-email-error': 'Email není ve správném formátu',
+	'register-user-profileImage-label': 'Profilový obrázek'
 };

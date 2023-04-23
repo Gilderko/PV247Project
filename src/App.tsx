@@ -2,7 +2,6 @@ import {
 	AppBar,
 	Container,
 	Toolbar,
-	Button,
 	Box,
 	ThemeProvider,
 	CssBaseline
@@ -48,7 +47,7 @@ const rootRoute = new RootRoute({
 							{!user ? (
 								<ButtonLink to="/login">Sign In</ButtonLink>
 							) : (
-								<Button onClick={signOut}>Sign Out</Button>
+								<ButtonLink onClick={signOut}>Sign Out</ButtonLink>
 							)}
 						</Toolbar>
 					</Container>

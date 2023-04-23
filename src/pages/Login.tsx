@@ -7,15 +7,17 @@ import {
 	Grid,
 	useTheme
 } from '@mui/material';
-import { FormEvent, useState } from 'react';
+import { FormEvent, useEffect, useState } from 'react';
 import { useNavigate } from '@tanstack/react-router';
 
 import useField from '../hooks/useField';
 import usePageTitle from '../hooks/usePageTitle';
-import { signIn, signUp } from '../firebase';
+import { signIn } from '../firebase';
+import useLoggedInUser from '../hooks/useLoggedInUser';
 
 const Login = () => {
 	usePageTitle('Login');
+	const loggedInUser = useLoggedInUser();
 	const theme = useTheme();
 
 	const navigate = useNavigate();
@@ -24,6 +26,12 @@ const Login = () => {
 	const password = useField('password', true);
 
 	const [submitError, setSubmitError] = useState<string>();
+
+	useEffect(() => {
+		if (loggedInUser) {
+			navigate({ to: '/' });
+		}
+	}, [loggedInUser, navigate]);
 
 	return (
 		<Paper
