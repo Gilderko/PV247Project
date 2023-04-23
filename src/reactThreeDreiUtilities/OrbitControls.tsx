@@ -1,3 +1,4 @@
+/* eslint-disable react/no-unknown-property */
 import {
 	EventManager,
 	ReactThreeFiber,
@@ -58,9 +59,9 @@ export const OrbitControls = React.forwardRef<
 		const set = useThree(state => state.set);
 		const get = useThree(state => state.get);
 		const performance = useThree(state => state.performance);
-		const explCamera = camera || defaultCamera;
-		const explDomElement = (domElement ||
-			events.connected ||
+		const explCamera = camera ?? defaultCamera;
+		const explDomElement = (domElement ??
+			events.connected ??
 			gl.domElement) as HTMLElement;
 		const controls = React.useMemo(
 			() => new OrbitControlsImpl(explCamera),

@@ -6,18 +6,19 @@ import {
 	IconButton,
 	Typography
 } from '@mui/material';
-import { Review } from '../firebase';
-import useLoggedInUser from '../hooks/useLoggedInUser';
 import { Delete, Star, StarBorder } from '@mui/icons-material';
 
+import { Review } from '../firebase';
+import useLoggedInUser from '../hooks/useLoggedInUser';
+
 type ReviewPreviewProps = {
-	reviewId: string;
+	deleteCallback: () => Promise<void>;
 	review: Review;
 };
 
 const ReviewPreview = ({
-	review: { byEmail, stars, description, createdAt },
-	reviewId
+	review: { byEmail, stars, description },
+	deleteCallback
 }: ReviewPreviewProps) => {
 	const user = useLoggedInUser();
 
@@ -48,7 +49,7 @@ const ReviewPreview = ({
 			</CardContent>
 			{user?.email === byEmail && (
 				<CardActions>
-					<IconButton color="error" title="Delete">
+					<IconButton color="error" title="Delete" onClick={deleteCallback}>
 						<Delete />
 					</IconButton>
 				</CardActions>

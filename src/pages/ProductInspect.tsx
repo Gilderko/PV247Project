@@ -1,7 +1,9 @@
 import { useParams } from '@tanstack/react-router';
-import { Furniture, furnitureDocument } from '../firebase';
 import { useEffect, useState } from 'react';
 import { DocumentSnapshot, onSnapshot } from 'firebase/firestore';
+import { Box } from '@mui/material';
+
+import { Furniture, furnitureDocument } from '../firebase';
 import ProductInspectDetail from '../components/ProductInspectDetail';
 
 const ProductInspect = () => {
@@ -20,11 +22,13 @@ const ProductInspect = () => {
 
 	// Here do the 3D Stuff
 	return (
-		<>
-			{furniture && furData && (
+		<Box>
+			{furniture && furData ? (
 				<ProductInspectDetail furnitureId={furniture.id} furniture={furData} />
+			) : (
+				<Box />
 			)}
-		</>
+		</Box>
 	);
 };
 

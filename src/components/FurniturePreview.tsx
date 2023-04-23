@@ -1,21 +1,15 @@
-import { QueryDocumentSnapshot } from 'firebase/firestore';
-import { Furniture } from '../firebase';
-import { Link, useNavigate } from '@tanstack/react-router';
+import { Link } from '@tanstack/react-router';
 import { Box, Divider, Paper, Typography, useTheme } from '@mui/material';
+
+import { Furniture } from '../firebase';
 
 type FurnitureProps = {
 	furniture: Furniture;
 	furnitutreId: string;
 };
 
-const maxStringLenght = 50;
-
 const FurniturePreview = ({ furniture, furnitutreId }: FurnitureProps) => {
 	const theme = useTheme();
-	const stringLen =
-		maxStringLenght > furniture.description.length
-			? furniture.description.length
-			: maxStringLenght;
 
 	return (
 		<Link
@@ -46,7 +40,7 @@ const FurniturePreview = ({ furniture, furnitutreId }: FurnitureProps) => {
 				<img
 					style={{ width: '100%' }}
 					src={furniture.imageURL}
-					alt="Furniture Image"
+					alt="Furniture preview"
 				/>
 				<Divider sx={{ marginBottom: '0.1rem' }} />
 				<Box
@@ -64,7 +58,7 @@ const FurniturePreview = ({ furniture, furnitutreId }: FurnitureProps) => {
 						sx={{ fontSize: '0.8rem' }}
 					>{`Material: ${furniture.materialType}`}</Typography>
 					<Divider sx={{ marginBottom: '0.1rem' }} />
-					<Box sx={{ flexGrow: 1 }}></Box>
+					<Box sx={{ flexGrow: 1 }} />
 				</Box>
 				<Typography
 					sx={{
