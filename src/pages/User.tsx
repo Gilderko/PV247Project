@@ -51,7 +51,9 @@ const User = () => {
 				</Typography>
 				<Typography>12.05.2000</Typography>
 			</Box>
-			<ButtonLink to="/edituser">Edit profile</ButtonLink>
+			<ButtonLink color="primary" variant="contained" to="/edituser">
+				Edit profile
+			</ButtonLink>
 		</Box>
 	);
 };

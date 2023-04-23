@@ -82,7 +82,9 @@ const EditUser = () => {
 							required
 							variant="standard"
 						/>
-						<Button type="submit">Save</Button>
+						<Button variant="contained" type="submit">
+							Save
+						</Button>
 					</Box>
 				)}
 			/>

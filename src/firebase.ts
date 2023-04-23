@@ -13,7 +13,9 @@ import {
 	doc,
 	DocumentReference,
 	getFirestore,
-	Timestamp
+	query,
+	Timestamp,
+	where
 } from 'firebase/firestore';
 
 const firebaseConfig = {
@@ -137,3 +139,6 @@ export const ordersCollection = collection(
 
 export const orderDocument = (id: string) =>
 	doc(db, 'orders', id) as DocumentReference<Order>;
+
+export const getOrdersByUserEmail = (userEmail: string) =>
+	query(ordersCollection, where('userEmail', '==', userEmail));

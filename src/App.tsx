@@ -13,9 +13,6 @@ import {
 	Router,
 	Route
 } from '@tanstack/react-router';
-import { z } from 'zod';
-import { useEffect } from 'react';
-import { addDoc, setDoc } from 'firebase/firestore';
 
 import theme from './theme';
 import useLoggedInUser, { UserProvider } from './hooks/useLoggedInUser';
@@ -42,7 +39,7 @@ const rootRoute = new RootRoute({
 					<Container>
 						<Toolbar disableGutters sx={{ gap: 2 }}>
 							<ButtonLink to="/">Products</ButtonLink>
-							<ButtonLink to="/orders">My Orders</ButtonLink>
+							{user && <ButtonLink to="/orders">My Orders</ButtonLink>}
 							{user && <ButtonLink to="/user">My Profile</ButtonLink>}
 							<Box sx={{ flexGrow: 1 }} />
 							<img style={{ height: '3rem' }} src={logo} alt="Logo" />

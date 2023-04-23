@@ -30,6 +30,7 @@ import Loading from './Loading';
 import ProductDescription from './ProductDescription';
 import ReviewPreview from './ReviewPreview';
 import AddReview from './AddReview';
+import CreateOrder from './CreateOrder';
 
 type ProductInspectDetailProps = {
 	furnitureId: string;
@@ -102,8 +103,25 @@ const ProductInspectDetail = ({
 							/>
 						)}
 					</Box>
-
-					<ProductDescription furniture={furniture} />
+					<Box sx={{ display: 'flex', flexDirection: 'column' }}>
+						<ProductDescription furniture={furniture} />
+						{user && (
+							<CreateOrder
+								furnitureId={furnitureId}
+								furnitureName={furniture.name}
+							>
+								{open => (
+									<Button
+										onClick={open}
+										variant="contained"
+										sx={{ alignSelf: 'center', marginTop: '1rem' }}
+									>
+										Order
+									</Button>
+								)}
+							</CreateOrder>
+						)}
+					</Box>
 				</CardContent>
 			</Card>
 			{/* Add Review */}
