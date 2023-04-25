@@ -1,5 +1,21 @@
 import { Furniture } from './firebase';
 
+// Update data function
+/*
+useEffect(
+			() =>
+				onSnapshot(furnituresCollection, snapshot => {
+					snapshot.docs.forEach(doc =>
+						setDoc(
+							doc.ref,
+							furnituresData.find(info => info.name === doc.data().name)
+						)
+					);
+				}),
+			[]
+		);
+*/
+
 export const furnituresData: Furniture[] = [
 	{
 		name: 'Table Ikea',

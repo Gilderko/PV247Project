@@ -88,9 +88,10 @@ const ProductInspectDetail = ({
 						>
 							<Box
 								sx={{
-									marginBottom: '0.5rem',
+									paddingTop: '0.5rem',
+									marginBottom: '1rem',
 									height: '20rem',
-									maxWidth: '20rem'
+									width: '20rem'
 								}}
 							>
 								{!imagePreviewed && (
@@ -115,9 +116,8 @@ const ProductInspectDetail = ({
 									<img
 										src={imagePreviewed}
 										style={{
-											maxWidth: '20rem',
-											maxHeight: '20rem',
-											width: '100%'
+											width: '100%',
+											maxHeight: '100%'
 										}}
 										alt="Furniture preview"
 									/>
