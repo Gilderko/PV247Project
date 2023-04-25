@@ -3,13 +3,17 @@ import { Box, Typography } from '@mui/material';
 import { Furniture } from '../firebase';
 
 type ProductDescriptionProps = {
+	children?: React.ReactNode;
 	furniture: Furniture;
 };
 
-const ProductDescription = ({ furniture }: ProductDescriptionProps) => (
+const ProductDescription = ({
+	furniture,
+	children
+}: ProductDescriptionProps) => (
 	<Box
 		sx={{
-			padding: '0rem 1rem 1rem 2rem',
+			padding: '0.5rem 0rem 1rem 0.5rem',
 			gap: '1.5rem',
 			display: 'flex',
 			flexDirection: 'column'
@@ -27,6 +31,7 @@ const ProductDescription = ({ furniture }: ProductDescriptionProps) => (
 			<Typography variant="h5">Material type:</Typography>
 			<Typography>{furniture.materialType}</Typography>
 		</Box>
+		{children}
 	</Box>
 );
 

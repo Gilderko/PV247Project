@@ -20,7 +20,7 @@ const FurniturePreview = ({ furniture, furnitutreId }: FurnitureProps) => {
 			<Paper
 				elevation={1}
 				sx={{
-					maxWidth: '15rem',
+					width: '15rem',
 					height: '25rem',
 					display: 'flex',
 					flexDirection: 'column'
@@ -38,7 +38,7 @@ const FurniturePreview = ({ furniture, furnitutreId }: FurnitureProps) => {
 					{furniture.name}
 				</Typography>
 				<img
-					style={{ width: '100%' }}
+					style={{ width: '100%', maxHeight: '16rem' }}
 					src={furniture.imageURL}
 					alt="Furniture preview"
 				/>
