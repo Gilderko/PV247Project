@@ -25,6 +25,8 @@ import Orders from './pages/Orders';
 import NotFound from './pages/NotFound';
 import ButtonLink from './components/ButtonLink';
 import logo from './assets/websiteImage.png';
+import Register from './pages/Register';
+import { LanguageProvider } from './hooks/useTranslation';
 
 const rootRoute = new RootRoute({
 	component: () => {
@@ -43,9 +45,9 @@ const rootRoute = new RootRoute({
 							<img style={{ height: '3rem' }} src={logo} alt="Logo" />
 
 							{!user ? (
-								<ButtonLink to="/login">Login</ButtonLink>
+								<ButtonLink to="/login">Sign In</ButtonLink>
 							) : (
-								<ButtonLink onClick={signOut}>Logout</ButtonLink>
+								<ButtonLink onClick={signOut}>Sign Out</ButtonLink>
 							)}
 						</Toolbar>
 					</Container>
@@ -88,6 +90,12 @@ const loginRoute = new Route({
 	component: Login
 });
 
+const registerRoute = new Route({
+	getParentRoute: () => rootRoute,
+	path: '/register',
+	component: Register
+});
+
 const ordersRoute = new Route({
 	getParentRoute: () => rootRoute,
 	path: '/orders',
@@ -106,6 +114,7 @@ const routeTree = rootRoute.addChildren([
 	userInspectRoute,
 	ordersRoute,
 	loginRoute,
+	registerRoute,
 	notFoundRoute
 ]);
 
@@ -120,7 +129,9 @@ declare module '@tanstack/react-router' {
 
 const App = () => (
 	<UserProvider>
-		<RouterProvider router={router} />
+		<LanguageProvider>
+			<RouterProvider router={router} />
+		</LanguageProvider>
 	</UserProvider>
 );
 
