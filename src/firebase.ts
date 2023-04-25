@@ -13,7 +13,9 @@ import {
 	doc,
 	DocumentReference,
 	getFirestore,
-	Timestamp
+	query,
+	Timestamp,
+	where
 } from 'firebase/firestore';
 import { getStorage, ref } from 'firebase/storage';
 
@@ -133,7 +135,7 @@ export type Order = {
 	streetNumber: number;
 	furnitureId: string;
 	userEmail: string;
-	dateCreated: Date;
+	dateCreated: Timestamp;
 };
 
 export const ordersCollection = collection(
@@ -143,3 +145,6 @@ export const ordersCollection = collection(
 
 export const orderDocument = (id: string) =>
 	doc(db, 'orders', id) as DocumentReference<Order>;
+
+export const getOrdersByUserEmail = (userEmail: string) =>
+	query(ordersCollection, where('userEmail', '==', userEmail));

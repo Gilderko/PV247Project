@@ -20,6 +20,7 @@ import { signOut } from './firebase';
 import Products from './pages/Products';
 import ProductInspect from './pages/ProductInspect';
 import User from './pages/User';
+import EditUser from './pages/EditUser';
 import Login from './pages/Login';
 import Orders from './pages/Orders';
 import NotFound from './pages/NotFound';
@@ -40,14 +41,17 @@ const rootRoute = new RootRoute({
 					<Container>
 						<Toolbar disableGutters sx={{ gap: 2 }}>
 							<ButtonLink to="/">Products</ButtonLink>
-							<ButtonLink to="/orders">My Orders</ButtonLink>
+							{user && <ButtonLink to="/orders">My Orders</ButtonLink>}
+							{user && <ButtonLink to="/user">My Profile</ButtonLink>}
 							<Box sx={{ flexGrow: 1 }} />
 							<img style={{ height: '3rem' }} src={logo} alt="Logo" />
 
 							{!user ? (
 								<ButtonLink to="/login">Sign In</ButtonLink>
 							) : (
-								<ButtonLink onClick={signOut}>Sign Out</ButtonLink>
+								<ButtonLink to="/" onClick={signOut}>
+									Sign Out
+								</ButtonLink>
 							)}
 						</Toolbar>
 					</Container>
@@ -80,8 +84,14 @@ const productsInspectRoute = new Route({
 
 const userInspectRoute = new Route({
 	getParentRoute: () => rootRoute,
-	path: '/users/$Id',
+	path: '/user',
 	component: User
+});
+
+const userEditRoute = new Route({
+	getParentRoute: () => rootRoute,
+	path: '/edituser',
+	component: EditUser
 });
 
 const loginRoute = new Route({
@@ -114,6 +124,7 @@ const routeTree = rootRoute.addChildren([
 	userInspectRoute,
 	ordersRoute,
 	loginRoute,
+	userEditRoute,
 	registerRoute,
 	notFoundRoute
 ]);
