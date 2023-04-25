@@ -49,7 +49,9 @@ const rootRoute = new RootRoute({
 							{!user ? (
 								<ButtonLink to="/login">Sign In</ButtonLink>
 							) : (
-								<ButtonLink onClick={signOut}>Sign Out</ButtonLink>
+								<ButtonLink to="/" onClick={signOut}>
+									Sign Out
+								</ButtonLink>
 							)}
 						</Toolbar>
 					</Container>

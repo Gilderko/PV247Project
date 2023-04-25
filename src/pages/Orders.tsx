@@ -1,6 +1,5 @@
 import {
 	Box,
-	IconButton,
 	Paper,
 	Table,
 	TableBody,
@@ -10,23 +9,17 @@ import {
 	TableRow,
 	Typography
 } from '@mui/material';
-import { QueryDocumentSnapshot, getDoc, getDocs } from 'firebase/firestore';
+import { QueryDocumentSnapshot, getDocs } from 'firebase/firestore';
 import { useEffect, useState } from 'react';
-import { Delete } from '@mui/icons-material';
 
 import useLoggedInUser from '../hooks/useLoggedInUser';
-import {
-	Furniture,
-	Order,
-	furnitureDocument,
-	getOrdersByUserEmail
-} from '../firebase';
+import { Order, getOrdersByUserEmail } from '../firebase';
 import ButtonLink from '../components/ButtonLink';
 import OrderTableRow from '../components/OrderTableRow';
 
 const Orders = () => {
 	const user = useLoggedInUser();
-	const [orders, setOrders] = useState<Order[]>([]);
+	const [orders, setOrders] = useState<QueryDocumentSnapshot<Order>[]>([]);
 	useEffect(() => {
 		if (!user?.email) return;
 
@@ -34,7 +27,7 @@ const Orders = () => {
 			const userOrders = await getDocs(
 				getOrdersByUserEmail(user.email ?? 'unknown')
 			);
-			setOrders(userOrders.docs.map(doc => doc.data()));
+			setOrders(userOrders.docs);
 		};
 		fetchOrders();
 	}, [orders, user]);
@@ -73,14 +66,16 @@ const Orders = () => {
 									</TableCell>
 									<TableCell sx={{ fontWeight: '600' }}>Price</TableCell>
 									<TableCell sx={{ fontWeight: '600' }}>Date</TableCell>
-									<TableCell sx={{ fontWeight: '600' }} align="right">
-										Actions
-									</TableCell>
+									<TableCell sx={{ fontWeight: '600' }} align="right" />
 								</TableRow>
 							</TableHead>
 							<TableBody>
-								{orders.map((order, index) => (
-									<OrderTableRow key={index} order={order} />
+								{orders.map(order => (
+									<OrderTableRow
+										key={order.id}
+										order={order.data()}
+										orderId={order.id}
+									/>
 								))}
 							</TableBody>
 						</Table>

@@ -17,6 +17,9 @@ import TextInput from '../components/TextInput';
 import { useTranslation } from '../hooks/useTranslation';
 import { signUp, userInfoDocument, userProfilePhotos } from '../firebase';
 import useLoggedInUser from '../hooks/useLoggedInUser';
+import { isValidEmail, isValidImageType } from '../utils/userDataValidators';
+import { saveUserProfileImage } from '../utils/saveUserProfileImage';
+import UserInfoFields from '../components/UserInfoFields';
 
 // const ImageComponent = () => {
 // 	const user = useLoggedInUser();
@@ -61,32 +64,18 @@ const Register = () => {
 				<Form
 					onSubmit={async values => {
 						try {
-							let fileExtension = '';
-							if (selectedImage) {
-								fileExtension = selectedImage.name.split('.').pop() ?? '';
-								if (
-									fileExtension !== 'jpg' &&
-									fileExtension !== 'png' &&
-									fileExtension !== 'jpeg'
-								) {
-									setSubmitError('Invalid file type for user image!');
-									return;
-								}
+							if (selectedImage && !isValidImageType(selectedImage.name)) {
+								setSubmitError('Invalid file type for user image!');
+								return;
 							}
 							// register user with email and password
 							const user = await signUp(values.email, values.password);
 
 							// upload user image to firebase storage
-							let downloadUrl = '';
-							if (selectedImage) {
-								const storageRef = ref(
-									userProfilePhotos,
-									`${user.user.uid}.${fileExtension}`
-								);
-								const result = await uploadBytes(storageRef, selectedImage);
-								downloadUrl = await getDownloadURL(result.ref);
-							}
-
+							const downloadUrl = await saveUserProfileImage(
+								selectedImage,
+								user.user.uid
+							);
 							// save user info to firestore
 							await setDoc(userInfoDocument(user.user.uid), {
 								firstName: values.firstName,
@@ -111,10 +100,7 @@ const Register = () => {
 							);
 						}
 
-						const emailRegex = new RegExp(
-							'^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+.[a-zA-Z]{2,}$'
-						);
-						if (!emailRegex.test(values.email)) {
+						if (!isValidEmail(values.email)) {
 							errors.email = translation('register-user-email-error');
 						}
 
@@ -133,30 +119,7 @@ const Register = () => {
 								width: '100%'
 							}}
 						>
-							<TextInput
-								id="firstName"
-								label={translation('register-user-firstName-label')}
-								required
-								variant="standard"
-							/>
-							<TextInput
-								id="lastName"
-								label={translation('register-user-lastName-label')}
-								required
-								variant="standard"
-							/>
-							<TextInput
-								id="birthDate"
-								label={translation('register-user-birthDate-label')}
-								required
-								variant="standard"
-							/>
-							<TextInput
-								id="email"
-								label={translation('register-user-email-label')}
-								required
-								variant="standard"
-							/>
+							<UserInfoFields />
 							<Typography
 								variant="h6"
 								component="h3"
@@ -187,15 +150,42 @@ const Register = () => {
 							>
 								{translation('register-user-profileImage-label')}
 							</Typography>
-							<input
-								id="profileImage"
-								type="file"
-								name="profileImage"
-								onChange={event => {
-									if (!event.target.files) return;
-									setSelectedImage(event.target.files[0]);
+							<Box
+								sx={{
+									display: 'flex',
+									flexDirection: 'row',
+									alignSelf: 'start',
+									alignItems: 'center',
+									marginBottom: '1rem'
 								}}
-							/>
+							>
+								<Button
+									sx={{
+										color: theme.palette.primary.contrastText,
+										textTransform: 'none'
+									}}
+									variant="contained"
+									component="label"
+								>
+									<Typography variant="body2">
+										Choose profile picture
+									</Typography>
+									<input
+										id="profileImage"
+										type="file"
+										hidden
+										name="profileImage"
+										onChange={event => {
+											if (!event.target.files) return;
+											setSelectedImage(event.target.files[0]);
+										}}
+									/>
+								</Button>
+								<Typography sx={{ marginLeft: '1rem' }} variant="body1">
+									{selectedImage ? selectedImage.name : ''}
+								</Typography>
+							</Box>
+
 							{submitError && (
 								<Typography
 									variant="caption"

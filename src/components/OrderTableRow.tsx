@@ -2,11 +2,18 @@ import { IconButton, TableCell, TableRow, Tooltip } from '@mui/material';
 import { Delete } from '@mui/icons-material';
 import { useEffect, useState } from 'react';
 import { Timestamp, getDoc } from '@firebase/firestore';
+import { deleteDoc } from 'firebase/firestore';
 
-import { Furniture, Order, furnitureDocument } from '../firebase';
+import {
+	Furniture,
+	Order,
+	furnitureDocument,
+	orderDocument
+} from '../firebase';
 
 type OrderTableRowProps = {
 	order: Order;
+	orderId: string;
 };
 
 const daySeconds = 86400;
@@ -21,7 +28,7 @@ const disableDelete = (created: Timestamp): boolean => {
 	return false;
 };
 
-const OrderTableRow = ({ order }: OrderTableRowProps) => {
+const OrderTableRow = ({ order, orderId }: OrderTableRowProps) => {
 	const [furnitureInfo, setFurnitureInfo] = useState<Furniture>();
 	useEffect(() => {
 		const fetchFurniture = async () => {
@@ -50,7 +57,11 @@ const OrderTableRow = ({ order }: OrderTableRowProps) => {
 					}
 				>
 					<span>
-						<IconButton disabled={deleteDisabled} color="error">
+						<IconButton
+							onClick={() => deleteDoc(orderDocument(orderId))}
+							disabled={deleteDisabled}
+							color="error"
+						>
 							<Delete />
 						</IconButton>
 					</span>
