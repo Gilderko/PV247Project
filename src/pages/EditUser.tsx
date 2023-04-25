@@ -8,7 +8,6 @@ import { updateEmail } from 'firebase/auth';
 import useLoggedInUser from '../hooks/useLoggedInUser';
 import { UserInfo, userInfoDocument } from '../firebase';
 import ButtonLink from '../components/ButtonLink';
-import TextInput from '../components/TextInput';
 import theme from '../theme';
 import { isValidEmail, isValidImageType } from '../utils/userDataValidators';
 import { saveUserProfileImage } from '../utils/saveUserProfileImage';
@@ -90,7 +89,10 @@ const EditUser = () => {
 							lastName: values.lastName,
 							birthDate: values.birthDate,
 							email: values.email,
-							profileImageURL: downloadUrl ?? userInfo?.profileImageURL
+							profileImageURL:
+								downloadUrl.length === 0
+									? userInfo?.profileImageURL
+									: downloadUrl
 						});
 					} catch (err) {
 						setSubmitError(

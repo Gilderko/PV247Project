@@ -133,26 +133,44 @@ const ProductInspectDetail = ({
 							</Button>
 						</Box>
 						<Divider sx={{ marginBottom: '0.5rem', paddingTop: '1rem' }} />
-						<ProductDescription furniture={furniture}>
-							<Box>
-								{furniture.imagesDetail.map((furURL, i) => (
-									<Button
-										key={i}
-										sx={{
-											width: '7rem',
-											height: '7rem'
-										}}
-										onClick={() => setImagePreviewed(furURL)}
-									>
-										<img
-											style={{ width: '100%', height: '100%' }}
-											src={furURL}
-											alt="Detail preview option"
-										/>
-									</Button>
-								))}
-							</Box>
-						</ProductDescription>
+						<Box sx={{ display: 'flex', flexDirection: 'column' }}>
+							<ProductDescription furniture={furniture}>
+								<Box>
+									{furniture.imagesDetail.map((furURL, i) => (
+										<Button
+											key={i}
+											sx={{
+												width: '7rem',
+												height: '7rem'
+											}}
+											onClick={() => setImagePreviewed(furURL)}
+										>
+											<img
+												style={{ width: '100%', height: '100%' }}
+												src={furURL}
+												alt="Detail preview option"
+											/>
+										</Button>
+									))}
+								</Box>
+							</ProductDescription>
+							{user && (
+								<CreateOrder
+									furnitureId={furnitureId}
+									furnitureName={furniture.name}
+								>
+									{open => (
+										<Button
+											onClick={open}
+											variant="contained"
+											sx={{ alignSelf: 'center', marginTop: '1rem' }}
+										>
+											Order
+										</Button>
+									)}
+								</CreateOrder>
+							)}
+						</Box>
 					</Box>
 				</CardContent>
 			</Card>
