@@ -67,110 +67,117 @@ const ProductInspectDetail = ({
 				}}
 				elevation={2}
 			>
-				<Typography variant="h3">{furniture.name}</Typography>
-				<Divider />
-				<CardContent sx={{ padding: '0rem' }}>
-					{/* Description */}
+				<Box
+					sx={{
+						display: 'flex',
+						alignItems: 'center'
+					}}
+				>
+					<Typography variant="h3">{furniture.name}</Typography>
+					<Box sx={{ flexGrow: 1 }} />
+					{user && (
+						<CreateOrder
+							furnitureId={furnitureId}
+							furnitureName={furniture.name}
+						>
+							{open => (
+								<Button
+									onClick={open}
+									variant="contained"
+									sx={{ maxWidth: '5rem', maxHeight: '2.5rem' }}
+								>
+									Order
+								</Button>
+							)}
+						</CreateOrder>
+					)}
+				</Box>
 
+				<Divider />
+				<CardContent
+					sx={{
+						padding: '0rem',
+						display: 'flex',
+						flexDirection: matches ? 'column' : 'row',
+						width: '100%'
+					}}
+				>
+					{/* Description */}
 					<Box
 						sx={{
 							display: 'flex',
-							flexDirection: matches ? 'column' : 'row',
-							width: '100%'
+							flexDirection: 'column',
+							alignItems: 'center',
+							minHeight: '15rem'
 						}}
 					>
 						<Box
 							sx={{
-								display: 'flex',
-								flexDirection: 'column',
-								alignItems: 'center',
-								minHeight: '15rem'
+								paddingTop: '0.5rem',
+								marginBottom: '1rem',
+								height: '20rem',
+								width: '20rem'
 							}}
 						>
-							<Box
-								sx={{
-									paddingTop: '0.5rem',
-									marginBottom: '1rem',
-									height: '20rem',
-									width: '20rem'
-								}}
-							>
-								{!imagePreviewed && (
-									<Suspense fallback={<Loading />}>
-										<Canvas
-											camera={{
-												fov: 45,
-												near: 0.1,
-												far: 1000,
-												position: [6, 8, 8]
-											}}
-										>
-											<color args={[255, 255, 255]} attach="background" />
-											<ambientLight />
-											<directionalLight color="white" position={[0, 3, 5]} />
-											<OrbitControls />
-											<Furniture3DInspect furniture={furniture} />
-										</Canvas>
-									</Suspense>
-								)}
-								{imagePreviewed && (
-									<img
-										src={imagePreviewed}
-										style={{
-											width: '100%',
-											maxHeight: '100%'
+							{!imagePreviewed && (
+								<Suspense fallback={<Loading />}>
+									<Canvas
+										camera={{
+											fov: 45,
+											near: 0.1,
+											far: 1000,
+											position: [6, 8, 8]
 										}}
-										alt="Furniture preview"
-									/>
-								)}
-							</Box>
-							<Button
-								sx={{ font: 'black', maxWidth: '6rem' }}
-								variant="contained"
-								onClick={() => setImagePreviewed(undefined)}
-							>
-								3D View
-							</Button>
-						</Box>
-						<Divider sx={{ marginBottom: '0.5rem', paddingTop: '1rem' }} />
-						<Box sx={{ display: 'flex', flexDirection: 'column' }}>
-							<ProductDescription furniture={furniture}>
-								<Box>
-									{furniture.imagesDetail.map((furURL, i) => (
-										<Button
-											key={i}
-											sx={{
-												width: '7rem',
-												height: '7rem'
-											}}
-											onClick={() => setImagePreviewed(furURL)}
-										>
-											<img
-												style={{ width: '100%', height: '100%' }}
-												src={furURL}
-												alt="Detail preview option"
-											/>
-										</Button>
-									))}
-								</Box>
-							</ProductDescription>
-							{user && (
-								<CreateOrder
-									furnitureId={furnitureId}
-									furnitureName={furniture.name}
-								>
-									{open => (
-										<Button
-											onClick={open}
-											variant="contained"
-											sx={{ alignSelf: 'center', marginTop: '1rem' }}
-										>
-											Order
-										</Button>
-									)}
-								</CreateOrder>
+									>
+										<color args={[255, 255, 255]} attach="background" />
+										<ambientLight />
+										<directionalLight color="white" position={[0, 3, 5]} />
+										<OrbitControls />
+										<Furniture3DInspect furniture={furniture} />
+									</Canvas>
+								</Suspense>
+							)}
+							{imagePreviewed && (
+								<img
+									src={imagePreviewed}
+									style={{
+										width: '100%',
+										maxHeight: '100%'
+									}}
+									alt="Furniture preview"
+								/>
 							)}
 						</Box>
+						<Button
+							sx={{ font: 'black', maxWidth: '6rem' }}
+							variant="contained"
+							onClick={() => setImagePreviewed(undefined)}
+						>
+							3D View
+						</Button>
+					</Box>
+					<Divider sx={{ marginBottom: '0.5rem', paddingTop: '1rem' }} />
+					<Box sx={{ display: 'flex', flexDirection: 'column' }}>
+						<ProductDescription furniture={furniture}>
+							<Box>
+								{furniture.imagesDetail.map((furURL, i) => (
+									<Button
+										key={i}
+										sx={{
+											width: '7rem',
+											height: '7rem'
+										}}
+										onClick={() => setImagePreviewed(furURL)}
+									>
+										<img
+											style={{ width: '100%', height: '100%' }}
+											src={furURL}
+											alt="Detail preview option"
+										/>
+									</Button>
+								))}
+							</Box>
+						</ProductDescription>
 					</Box>
 				</CardContent>
 			</Card>

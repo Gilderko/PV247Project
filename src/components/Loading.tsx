@@ -7,7 +7,11 @@ const Loading = () => (
 		<Typography sx={{ textAlign: 'center', fontWeight: 'bold' }}>
 			Loading
 		</Typography>
-		<img src={logo} style={{ width: '100%' }} alt="Loading preview" />
+		<img
+			src={logo}
+			style={{ width: '100%', maxHeight: '95%' }}
+			alt="Loading preview"
+		/>
 	</Box>
 );
 
