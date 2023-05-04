@@ -1,4 +1,4 @@
-import TextInput from './TextInput';
+import TextInput from './Utility/TextInput';
 
 const UserInfoFields = () => (
 	<>

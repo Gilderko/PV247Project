@@ -4,7 +4,7 @@ import { DocumentSnapshot, onSnapshot } from 'firebase/firestore';
 import { Box } from '@mui/material';
 
 import { Furniture, furnitureDocument } from '../firebase';
-import ProductInspectDetail from '../components/ProductInspectDetail';
+import ProductInspectDetail from '../components/ProductDetailPage/ProductInspectDetail';
 
 const ProductInspect = () => {
 	const params = useParams();

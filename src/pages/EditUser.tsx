@@ -7,7 +7,7 @@ import { updateEmail } from 'firebase/auth';
 
 import useLoggedInUser from '../hooks/useLoggedInUser';
 import { UserInfo, userInfoDocument } from '../firebase';
-import ButtonLink from '../components/ButtonLink';
+import ButtonLink from '../components/Utility/ButtonLink';
 import theme from '../theme';
 import { isValidEmail, isValidImageType } from '../utils/userDataValidators';
 import { saveUserProfileImage } from '../utils/saveUserProfileImage';

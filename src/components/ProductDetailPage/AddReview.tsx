@@ -13,9 +13,9 @@ import {
 import { ReactNode, useState } from 'react';
 import { Timestamp, setDoc } from 'firebase/firestore';
 
-import useField from '../hooks/useField';
-import { reviewsDocument } from '../firebase';
-import useLoggedInUser from '../hooks/useLoggedInUser';
+import useField from '../../hooks/useField';
+import { reviewsDocument } from '../../firebase';
+import useLoggedInUser from '../../hooks/useLoggedInUser';
 
 type Props = {
 	furnitureId: string;

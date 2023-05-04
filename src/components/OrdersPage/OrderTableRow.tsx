@@ -9,7 +9,7 @@ import {
 	Order,
 	furnitureDocument,
 	orderDocument
-} from '../firebase';
+} from '../../firebase';
 
 type OrderTableRowProps = {
 	order: Order;

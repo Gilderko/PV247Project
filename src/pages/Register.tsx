@@ -12,7 +12,7 @@ import { useEffect, useState } from 'react';
 import { setDoc } from 'firebase/firestore';
 
 import usePageTitle from '../hooks/usePageTitle';
-import TextInput from '../components/TextInput';
+import TextInput from '../components/Utility/TextInput';
 import { useTranslation } from '../hooks/useTranslation';
 import { signUp, userInfoDocument } from '../firebase';
 import useLoggedInUser from '../hooks/useLoggedInUser';

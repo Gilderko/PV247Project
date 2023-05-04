@@ -1,6 +1,6 @@
 import { Box, Typography } from '@mui/material';
 
-import logo from '../assets/loading.gif';
+import logo from '../../assets/loading.gif';
 
 const Loading = () => (
 	<Box sx={{ width: '100%', height: '100%' }}>

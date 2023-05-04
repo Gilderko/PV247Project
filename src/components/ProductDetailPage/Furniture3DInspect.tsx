@@ -4,7 +4,7 @@ import { useEffect } from 'react';
 import { Mesh } from 'three';
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader';
 
-import { Furniture } from '../firebase';
+import { Furniture } from '../../firebase';
 
 type Product3DViewProps = {
 	furniture: Furniture;

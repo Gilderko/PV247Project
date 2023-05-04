@@ -14,8 +14,8 @@ import { useEffect, useState } from 'react';
 
 import useLoggedInUser from '../hooks/useLoggedInUser';
 import { Order, getOrdersByUserEmail } from '../firebase';
-import ButtonLink from '../components/ButtonLink';
-import OrderTableRow from '../components/OrderTableRow';
+import ButtonLink from '../components/Utility/ButtonLink';
+import OrderTableRow from '../components/OrdersPage/OrderTableRow';
 
 const Orders = () => {
 	const user = useLoggedInUser();

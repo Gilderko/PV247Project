@@ -8,8 +8,8 @@ import {
 } from '@mui/material';
 import { Delete, Star, StarBorder } from '@mui/icons-material';
 
-import { Review } from '../firebase';
-import useLoggedInUser from '../hooks/useLoggedInUser';
+import { Review } from '../../firebase';
+import useLoggedInUser from '../../hooks/useLoggedInUser';
 
 type ReviewPreviewProps = {
 	deleteCallback: () => Promise<void>;

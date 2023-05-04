@@ -1,7 +1,7 @@
 import { Link } from '@tanstack/react-router';
 import { Box, Divider, Paper, Typography, useTheme } from '@mui/material';
 
-import { Furniture } from '../firebase';
+import { Furniture } from '../../firebase';
 
 type FurnitureProps = {
 	furniture: Furniture;

@@ -1,26 +1,20 @@
-import { Star, StarBorder } from '@mui/icons-material';
 import {
 	Box,
 	Button,
 	Dialog,
 	DialogActions,
 	DialogContent,
-	DialogContentText,
 	DialogTitle,
-	IconButton,
-	TextField,
 	Typography
 } from '@mui/material';
-import { ReactNode, useState } from 'react';
-import { Timestamp, addDoc, setDoc } from 'firebase/firestore';
-import { Form } from 'react-final-form';
 import { useNavigate } from '@tanstack/react-router';
+import { Timestamp, addDoc } from 'firebase/firestore';
+import { ReactNode, useState } from 'react';
+import { Form } from 'react-final-form';
 
-import useField from '../hooks/useField';
-import { orderDocument, ordersCollection, reviewsDocument } from '../firebase';
-import useLoggedInUser from '../hooks/useLoggedInUser';
-
-import TextInput from './TextInput';
+import { ordersCollection } from '../../firebase';
+import useLoggedInUser from '../../hooks/useLoggedInUser';
+import TextInput from '../Utility/TextInput';
 
 type Props = {
 	furnitureId: string;

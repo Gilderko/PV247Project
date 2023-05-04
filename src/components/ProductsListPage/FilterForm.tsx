@@ -7,10 +7,9 @@ import {
 	MaterialType,
 	furnitureTypes,
 	materialTypes
-} from '../firebase';
-
-import { MyTextField } from './MyTextField';
-import { MyCheckBoxField } from './MyCheckBoxField';
+} from '../../firebase';
+import { MyTextField } from '../Utility/MyTextField';
+import { MyCheckBoxField } from '../Utility/MyCheckBoxField';
 
 export type FilterValues = {
 	furnitureName: string;

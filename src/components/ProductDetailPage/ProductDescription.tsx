@@ -1,15 +1,15 @@
-import { Box, Typography } from '@mui/material';
+import { Box, Button, Typography } from '@mui/material';
 
-import { Furniture } from '../firebase';
+import { Furniture } from '../../firebase';
 
 type ProductDescriptionProps = {
-	children?: React.ReactNode;
+	setImagePreviewed: React.Dispatch<React.SetStateAction<string | undefined>>;
 	furniture: Furniture;
 };
 
 const ProductDescription = ({
 	furniture,
-	children
+	setImagePreviewed
 }: ProductDescriptionProps) => (
 	<Box
 		sx={{
@@ -31,7 +31,24 @@ const ProductDescription = ({
 			<Typography variant="h5">Material type:</Typography>
 			<Typography>{furniture.materialType}</Typography>
 		</Box>
-		{children}
+		<Box>
+			{furniture.imagesDetail.map((furURL, i) => (
+				<Button
+					key={i}
+					sx={{
+						width: '7rem',
+						height: '7rem'
+					}}
+					onClick={() => setImagePreviewed(furURL)}
+				>
+					<img
+						style={{ width: '100%', height: '100%' }}
+						src={furURL}
+						alt="Detail preview option"
+					/>
+				</Button>
+			))}
+		</Box>
 	</Box>
 );
 

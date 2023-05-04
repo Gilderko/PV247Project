@@ -24,7 +24,7 @@ import EditUser from './pages/EditUser';
 import Login from './pages/Login';
 import Orders from './pages/Orders';
 import NotFound from './pages/NotFound';
-import ButtonLink from './components/ButtonLink';
+import ButtonLink from './components/Utility/ButtonLink';
 import logo from './assets/websiteImage.png';
 import Register from './pages/Register';
 import { LanguageProvider } from './hooks/useTranslation';

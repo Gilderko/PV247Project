@@ -3,8 +3,11 @@ import { Outlet } from '@tanstack/react-router';
 import { QueryDocumentSnapshot, onSnapshot } from 'firebase/firestore';
 import { useEffect, useState } from 'react';
 
-import { FilterForm, FilterValues } from '../components/FilterForm';
-import FurniturePreview from '../components/FurniturePreview';
+import {
+	FilterForm,
+	FilterValues
+} from '../components/ProductsListPage/FilterForm';
+import FurniturePreview from '../components/ProductsListPage/FurniturePreview';
 import { Furniture, furnituresCollection } from '../firebase';
 
 const filterProducts = (

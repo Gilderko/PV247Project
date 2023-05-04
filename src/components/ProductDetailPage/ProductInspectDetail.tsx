@@ -21,16 +21,16 @@ import {
 	Review,
 	reviewsCollection,
 	reviewsDocument
-} from '../firebase';
-import { OrbitControls } from '../reactThreeDreiUtilities/OrbitControls';
-import useLoggedInUser from '../hooks/useLoggedInUser';
+} from '../../firebase';
+import { OrbitControls } from '../../reactThreeDreiUtilities/OrbitControls';
+import useLoggedInUser from '../../hooks/useLoggedInUser';
 
-import Furniture3DInspect from './Furniture3DInspect';
+import CreateOrder from './CreateOrder';
+import AddReview from './AddReview';
 import Loading from './Loading';
+import Furniture3DInspect from './Furniture3DInspect';
 import ProductDescription from './ProductDescription';
 import ReviewPreview from './ReviewPreview';
-import AddReview from './AddReview';
-import CreateOrder from './CreateOrder';
 
 type ProductInspectDetailProps = {
 	furnitureId: string;
@@ -157,28 +157,10 @@ const ProductInspectDetail = ({
 						</Button>
 					</Box>
 					<Divider sx={{ marginBottom: '0.5rem', paddingTop: '1rem' }} />
-					<Box sx={{ display: 'flex', flexDirection: 'column' }}>
-						<ProductDescription furniture={furniture}>
-							<Box>
-								{furniture.imagesDetail.map((furURL, i) => (
-									<Button
-										key={i}
-										sx={{
-											width: '7rem',
-											height: '7rem'
-										}}
-										onClick={() => setImagePreviewed(furURL)}
-									>
-										<img
-											style={{ width: '100%', height: '100%' }}
-											src={furURL}
-											alt="Detail preview option"
-										/>
-									</Button>
-								))}
-							</Box>
-						</ProductDescription>
-					</Box>
+					<ProductDescription
+						furniture={furniture}
+						setImagePreviewed={setImagePreviewed}
+					/>
 				</CardContent>
 			</Card>
 			{/* Add Review */}
