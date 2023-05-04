@@ -202,7 +202,14 @@ const ProductInspectDetail = ({
 						<Typography sx={{ marginBottom: '1rem' }} variant="h5">
 							Reviews
 						</Typography>
-						<Box sx={{ display: 'flex', flexDirection: 'row', flexWrap: 1 }}>
+						<Box
+							sx={{
+								display: 'flex',
+								flexDirection: 'row',
+								flexWrap: 1,
+								gap: '1rem'
+							}}
+						>
 							{reviews.map(rev => (
 								<ReviewPreview
 									review={{ ...rev.data() }}
