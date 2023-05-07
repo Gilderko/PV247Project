@@ -6,6 +6,7 @@ import {
 	TableCell,
 	TableContainer,
 	TableHead,
+	TablePagination,
 	TableRow,
 	Typography
 } from '@mui/material';
@@ -19,7 +20,17 @@ import OrderTableRow from '../components/OrdersPage/OrderTableRow';
 
 const Orders = () => {
 	const user = useLoggedInUser();
+	const [page, setPage] = useState(0);
+	const [rowsPerPage, setRowsPerPage] = useState(5);
 	const [orders, setOrders] = useState<QueryDocumentSnapshot<Order>[]>([]);
+
+	const handleChangeRowsPerPage = (
+		event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+	) => {
+		setRowsPerPage(parseInt(event.target.value, 10));
+		setPage(0);
+	};
+
 	useEffect(() => {
 		if (!user?.email) return;
 
@@ -70,16 +81,27 @@ const Orders = () => {
 								</TableRow>
 							</TableHead>
 							<TableBody>
-								{orders.map(order => (
-									<OrderTableRow
-										key={order.id}
-										order={order.data()}
-										orderId={order.id}
-									/>
-								))}
+								{orders
+									.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
+									.map(order => (
+										<OrderTableRow
+											key={order.id}
+											order={order.data()}
+											orderId={order.id}
+										/>
+									))}
 							</TableBody>
 						</Table>
 					</TableContainer>
+					<TablePagination
+						rowsPerPageOptions={[5, 10, 25]}
+						component="div"
+						count={orders.length}
+						rowsPerPage={rowsPerPage}
+						page={page}
+						onPageChange={(_, newPage) => setPage(newPage)}
+						onRowsPerPageChange={handleChangeRowsPerPage}
+					/>
 				</Box>
 			)}
 		</>
