@@ -1,8 +1,7 @@
-import { CheckBox } from '@mui/icons-material';
-import { Checkbox, FormControlLabel, Radio } from '@mui/material';
-import { Field, FieldAttributes, useField } from 'formik';
+import { Checkbox, FormControlLabel } from '@mui/material';
+import { FieldAttributes, useField } from 'formik';
 
-type MyRadioProps = { label: string } & FieldAttributes<{}>;
+type MyRadioProps = { label: string } & FieldAttributes<object>;
 
 export const MyCheckBoxField: React.FC<MyRadioProps> = ({
 	label,
