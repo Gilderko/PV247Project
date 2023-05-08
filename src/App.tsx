@@ -27,7 +27,6 @@ import NotFound from './pages/NotFound';
 import ButtonLink from './components/Utility/ButtonLink';
 import logo from './assets/websiteImage.png';
 import Register from './pages/Register';
-import { LanguageProvider } from './hooks/useTranslation';
 
 const rootRoute = new RootRoute({
 	component: () => {
