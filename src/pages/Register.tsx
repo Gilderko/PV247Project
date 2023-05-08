@@ -13,7 +13,6 @@ import { setDoc } from 'firebase/firestore';
 
 import usePageTitle from '../hooks/usePageTitle';
 import TextInput from '../components/Utility/TextInput';
-import { useTranslation } from '../hooks/useTranslation';
 import { signUp, userInfoDocument } from '../firebase';
 import useLoggedInUser from '../hooks/useLoggedInUser';
 import { isValidEmail, isValidImageType } from '../utils/userDataValidators';
@@ -26,7 +25,6 @@ const Register = () => {
 	const [selectedImage, setSelectedImage] = useState<File | null>(null);
 	const loggedInUser = useLoggedInUser();
 
-	const translation = useTranslation();
 	const theme = useTheme();
 
 	const navigate = useNavigate();
@@ -41,7 +39,7 @@ const Register = () => {
 		<Paper>
 			<Container sx={{ py: 2, display: 'flex', flexDirection: 'column' }}>
 				<Typography variant="h4" component="h2" textAlign="center" mb={3}>
-					{translation('register-user-title')}
+					Join Us
 				</Typography>
 				<Form
 					onSubmit={async values => {
@@ -77,13 +75,11 @@ const Register = () => {
 						const errors: Record<string, string> = {};
 
 						if (values.password !== values.passwordRepeat) {
-							errors.password = translation(
-								'register-user-passwordRepeat-error'
-							);
+							errors.password = 'Passwords do not match';
 						}
 
 						if (!isValidEmail(values.email)) {
-							errors.email = translation('register-user-email-error');
+							errors.email = 'Email is not in the correct format';
 						}
 
 						return errors;
@@ -108,18 +104,18 @@ const Register = () => {
 								textAlign="start"
 								sx={{ mt: 2 }}
 							>
-								{translation('register-user-password-section')}
+								Password
 							</Typography>
 							<TextInput
 								id="password"
-								label={translation('register-user-password-label')}
+								label="Password"
 								required
 								type="password"
 								variant="standard"
 							/>
 							<TextInput
 								id="passwordRepeat"
-								label={translation('register-user-passwordRepeat-label')}
+								label="Repeat Password"
 								required
 								type="password"
 								variant="standard"
@@ -130,7 +126,7 @@ const Register = () => {
 								textAlign="start"
 								sx={{ mt: 2 }}
 							>
-								{translation('register-user-profileImage-label')}
+								Profile Image
 							</Typography>
 							<Box
 								sx={{
@@ -167,7 +163,6 @@ const Register = () => {
 									{selectedImage ? selectedImage.name : ''}
 								</Typography>
 							</Box>
-
 							{submitError && (
 								<Typography
 									variant="caption"
@@ -183,7 +178,7 @@ const Register = () => {
 								variant="contained"
 								sx={{ color: theme.palette.secondary.main }}
 							>
-								{translation('register-user-submit-button')}
+								Register
 							</Button>
 						</Box>
 					)}
