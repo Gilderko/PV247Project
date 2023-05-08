@@ -14,7 +14,6 @@ import { setDoc } from 'firebase/firestore';
 
 import usePageTitle from '../hooks/usePageTitle';
 import TextInput from '../components/TextInput';
-import { useTranslation } from '../hooks/useTranslation';
 import { signUp, userInfoDocument, userProfilePhotos } from '../firebase';
 import useLoggedInUser from '../hooks/useLoggedInUser';
 
@@ -41,7 +40,6 @@ const Register = () => {
 	const [selectedImage, setSelectedImage] = useState<File | null>(null);
 	const loggedInUser = useLoggedInUser();
 
-	const translation = useTranslation();
 	const theme = useTheme();
 
 	const navigate = useNavigate();
@@ -56,7 +54,7 @@ const Register = () => {
 		<Paper>
 			<Container sx={{ py: 2, display: 'flex', flexDirection: 'column' }}>
 				<Typography variant="h4" component="h2" textAlign="center" mb={3}>
-					{translation('register-user-title')}
+					Join us
 				</Typography>
 				<Form
 					onSubmit={async values => {
@@ -106,16 +104,14 @@ const Register = () => {
 						const errors: Record<string, string> = {};
 
 						if (values.password !== values.passwordRepeat) {
-							errors.password = translation(
-								'register-user-passwordRepeat-error'
-							);
+							errors.password = 'Passwords do not match';
 						}
 
 						const emailRegex = new RegExp(
 							'^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+.[a-zA-Z]{2,}$'
 						);
 						if (!emailRegex.test(values.email)) {
-							errors.email = translation('register-user-email-error');
+							errors.email = 'Email is not in the correct format';
 						}
 
 						return errors;
@@ -135,46 +131,41 @@ const Register = () => {
 						>
 							<TextInput
 								id="firstName"
-								label={translation('register-user-firstName-label')}
+								label="First Name"
 								required
 								variant="standard"
 							/>
 							<TextInput
 								id="lastName"
-								label={translation('register-user-lastName-label')}
+								label="Last Name"
 								required
 								variant="standard"
 							/>
 							<TextInput
 								id="birthDate"
-								label={translation('register-user-birthDate-label')}
+								label="Birth Date"
 								required
 								variant="standard"
 							/>
-							<TextInput
-								id="email"
-								label={translation('register-user-email-label')}
-								required
-								variant="standard"
-							/>
+							<TextInput id="email" label="Email" required variant="standard" />
 							<Typography
 								variant="h6"
 								component="h3"
 								textAlign="start"
 								sx={{ mt: 2 }}
 							>
-								{translation('register-user-password-section')}
+								Password
 							</Typography>
 							<TextInput
 								id="password"
-								label={translation('register-user-password-label')}
+								label="Password"
 								required
 								type="password"
 								variant="standard"
 							/>
 							<TextInput
 								id="passwordRepeat"
-								label={translation('register-user-passwordRepeat-label')}
+								label="Repeat Password"
 								required
 								type="password"
 								variant="standard"
@@ -185,7 +176,7 @@ const Register = () => {
 								textAlign="start"
 								sx={{ mt: 2 }}
 							>
-								{translation('register-user-profileImage-label')}
+								Profile Image
 							</Typography>
 							<input
 								id="profileImage"
@@ -211,7 +202,7 @@ const Register = () => {
 								variant="contained"
 								sx={{ color: theme.palette.secondary.main }}
 							>
-								{translation('register-user-submit-button')}
+								Register
 							</Button>
 						</Box>
 					)}
