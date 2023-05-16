@@ -27,17 +27,16 @@ const ReviewPreview = ({
 			sx={{
 				display: 'flex',
 				flexDirection: 'column',
-
 				textAlign: 'left',
-				minWidth: '14rem',
-				maxWidth: '25rem',
-
-				maxHeight: '10rem',
-				overflow: 'scroll'
+				minWidth: '15rem',
+				maxWidth: '30rem',
+				visibility: 'visible'
 			}}
 		>
 			<CardContent sx={{ display: 'flex', flexDirection: 'column' }}>
-				<Typography color="textSecondary">{byEmail}</Typography>
+				<Typography sx={{ width: '100%' }} color="textSecondary">
+					{byEmail}
+				</Typography>
 				<Box mb={2}>
 					{[...Array(5).keys()].map(i =>
 						i < stars ? (

@@ -112,7 +112,7 @@ export const FilterForm: React.FC<Props> = ({ onSubmit }) => {
 							variant="contained"
 							sx={{
 								maxWidth: '8rem',
-								color: theme.palette.primary.contrastText,
+								color: theme.palette.secondary.main,
 								marginTop: '0.5rem'
 							}}
 							type="submit"

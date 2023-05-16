@@ -71,7 +71,7 @@ const AddReview = ({ furnitureId, children }: Props) => {
 						display: 'flex',
 						flexDirection: 'column',
 						gap: 2,
-						minWidth: 500
+						minWidth: '25rem'
 					}}
 				>
 					{/* Stars select */}
@@ -87,7 +87,7 @@ const AddReview = ({ furnitureId, children }: Props) => {
 							</IconButton>
 						))}
 					</Box>
-					<TextField label="Description" fullWidth {...description.props} />
+					<TextField label="Description" {...description.props} />
 				</DialogContent>
 				<DialogActions>
 					{submitError && (

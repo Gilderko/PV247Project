@@ -31,7 +31,8 @@ export const Reviews = ({ reviews, furnitureId }: ReviewsProps) => {
 						display: 'flex',
 						flexDirection: match ? 'row' : 'column',
 						flexWrap: 1,
-						gap: '1rem'
+						gap: '1rem',
+						alignItems: 'flex-start'
 					}}
 				>
 					{reviews.map(rev => (
