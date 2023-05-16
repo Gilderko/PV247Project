@@ -5,12 +5,7 @@ import { Link, LinkPropsOptions } from '@tanstack/react-router';
 type Props = ButtonProps & LinkPropsOptions;
 
 const ButtonLink = (props: Props) => (
-	<Button
-		sx={{ fontSize: 12 }}
-		color="secondary"
-		component={Link}
-		{...(props as any)}
-	/>
+	<Button color="secondary" component={Link} {...(props as any)} />
 );
 
 export default ButtonLink;
