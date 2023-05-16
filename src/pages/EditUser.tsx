@@ -119,7 +119,8 @@ const EditUser = () => {
 							flexDirection: 'column',
 							alignItems: 'start',
 							gap: 2,
-							width: '30%'
+							flexGrow: 1,
+							maxWidth: '25rem'
 						}}
 					>
 						<Avatar

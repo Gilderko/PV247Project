@@ -14,7 +14,7 @@ const UserFound = (userInfo: UserInfo) => (
 		}}
 	>
 		<Avatar sx={{ height: 150, width: 150 }} src={userInfo?.profileImageURL} />
-		<Typography variant="h3">
+		<Typography variant="h3" textAlign="center">
 			{userInfo?.firstName} {userInfo?.lastName}
 		</Typography>
 		<Box sx={{ display: 'flex' }}>

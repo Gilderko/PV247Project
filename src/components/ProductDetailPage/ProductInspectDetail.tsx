@@ -9,28 +9,19 @@ import {
 	useMediaQuery
 } from '@mui/material';
 import { Canvas } from '@react-three/fiber';
-import {
-	QueryDocumentSnapshot,
-	deleteDoc,
-	onSnapshot
-} from 'firebase/firestore';
+import { QueryDocumentSnapshot, onSnapshot } from 'firebase/firestore';
 import { Suspense, useEffect, useState } from 'react';
 
-import {
-	Furniture,
-	Review,
-	reviewsCollection,
-	reviewsDocument
-} from '../../firebase';
-import { OrbitControls } from '../../reactThreeDreiUtilities/OrbitControls';
+import { Furniture, Review, reviewsCollection } from '../../firebase';
 import useLoggedInUser from '../../hooks/useLoggedInUser';
+import { OrbitControls } from '../../reactThreeDreiUtilities/OrbitControls';
 
-import CreateOrder from './CreateOrder';
 import AddReview from './AddReview';
-import Loading from './Loading';
+import CreateOrder from './CreateOrder';
 import Furniture3DInspect from './Furniture3DInspect';
+import Loading from './Loading';
 import ProductDescription from './ProductDescription';
-import ReviewPreview from './ReviewPreview';
+import { Reviews } from './Reviews';
 
 type ProductInspectDetailProps = {
 	furnitureId: string;
@@ -178,33 +169,7 @@ const ProductInspectDetail = ({
 				</AddReview>
 			)}
 			{/* Reviews */}
-			{reviews.length !== 0 && (
-				<Card>
-					<CardContent sx={{ padding: '1rem' }}>
-						<Typography sx={{ marginBottom: '1rem' }} variant="h5">
-							Reviews
-						</Typography>
-						<Box
-							sx={{
-								display: 'flex',
-								flexDirection: 'row',
-								flexWrap: 1,
-								gap: '1rem'
-							}}
-						>
-							{reviews.map(rev => (
-								<ReviewPreview
-									review={{ ...rev.data() }}
-									deleteCallback={() =>
-										deleteDoc(reviewsDocument(furnitureId, rev.id))
-									}
-									key={rev.id}
-								/>
-							))}
-						</Box>
-					</CardContent>
-				</Card>
-			)}
+			<Reviews reviews={reviews} furnitureId={furnitureId} />
 		</>
 	);
 };
